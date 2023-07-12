@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_block_site_titles",
+  "info": {
+    "displayName": "Site Title"
+  },
+  "options": {},
+  "attributes": {
+    "value": {
+      "type": "string",
+      "unique": false,
+      "required": false
+    }
+  }
+}
