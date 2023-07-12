@@ -1,11 +1,25 @@
 {
   "name": "cloud-site-builder",
-  "version": "1.0.0",
-  "description": "Cloud site builder",
-  "main": "index.js",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A Strapi application workspaces",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "develop": "yarn workspace @csb/strapi-cms develop",
+    "start": "yarn workspace @csb/strapi-cms start",
+    "build": "yarn workspace @csb/strapi-cms build",
+    "strapi": "yarn workspace @csb/strapi-cms strapi",
+    "build-plugins": "yarn workspace @csb/strapi-plugin-next-builder-connector build && yarn workspace @csb/strapi-plugin-azure-integrations build"
   },
-  "author": "",
+  "author": {
+    "name": "A Strapi developer"
+  },
+  "engines": {
+    "node": ">=18.16.1 <=18.x.x",
+    "yarn": ">=1.22.19"
+  },
+  "workspaces": [
+    "packages/strapi-cms",
+    "packages/strapi-cms/src/plugins/*"
+  ],
   "license": "MIT"
 }

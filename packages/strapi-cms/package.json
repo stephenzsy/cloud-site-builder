@@ -1,0 +1,27 @@
+{
+  "name": "@csb/strapi-cms",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A Strapi application",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@strapi/plugin-graphql": "^4.11.5",
+    "@strapi/plugin-i18n": "^4.11.5",
+    "@strapi/plugin-users-permissions": "^4.11.5",
+    "@strapi/strapi": "^4.11.5",
+    "better-sqlite3": "^8.4.0",
+    "typescript": "^5.1.6"
+  },
+  "author": {
+    "name": "A Strapi developer"
+  },
+  "strapi": {
+    "uuid": "62e395ba-9553-4767-9445-61bb63537ffb"
+  },
+  "license": "MIT"
+}
