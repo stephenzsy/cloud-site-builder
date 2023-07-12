@@ -1,14 +1,20 @@
 {
   "collectionName": "components_block_site_titles",
   "info": {
-    "displayName": "Site Title"
+    "displayName": "Site Title",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "value": {
-      "type": "string",
-      "unique": false,
-      "required": false
+    "metadataLayout": {
+      "type": "component",
+      "repeatable": false,
+      "component": "metadata.layout"
+    },
+    "slot": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::slot.slot"
     }
   }
 }

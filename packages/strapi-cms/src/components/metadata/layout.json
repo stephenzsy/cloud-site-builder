@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_metadata_layouts",
+  "info": {
+    "displayName": "Layout",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "alignSelf": {
+      "type": "enumeration",
+      "enum": ["default"],
+      "default": "default"
+    }
+  }
+}

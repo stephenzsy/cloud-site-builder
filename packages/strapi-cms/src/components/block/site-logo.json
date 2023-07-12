@@ -1,8 +1,20 @@
 {
   "collectionName": "components_block_site_logos",
   "info": {
-    "displayName": "Site Logo"
+    "displayName": "Site Logo",
+    "description": ""
   },
   "options": {},
-  "attributes": {}
+  "attributes": {
+    "metadataLayout": {
+      "type": "component",
+      "repeatable": false,
+      "component": "metadata.layout"
+    },
+    "slot": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::slot.slot"
+    }
+  }
 }

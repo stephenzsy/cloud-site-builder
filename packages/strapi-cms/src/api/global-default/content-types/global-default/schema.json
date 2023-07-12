@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "global_defaults",
+  "info": {
+    "singularName": "global-default",
+    "pluralName": "global-defaults",
+    "displayName": "Global Defaults",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "template": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::template.template"
+    }
+  }
+}

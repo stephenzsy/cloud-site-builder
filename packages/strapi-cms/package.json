@@ -7,7 +7,8 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "build-plugins": "yarn workspace @csb/strapi-plugin-next-builder-connector build && yarn workspace @csb/strapi-plugin-azure-integrations build"
   },
   "dependencies": {
     "@strapi/plugin-graphql": "^4.11.5",
@@ -23,5 +24,8 @@
   "strapi": {
     "uuid": "62e395ba-9553-4767-9445-61bb63537ffb"
   },
+  "workspaces": [
+    "src/plugins/*"
+  ],
   "license": "MIT"
 }

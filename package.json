@@ -8,7 +8,8 @@
     "start": "yarn workspace @csb/strapi-cms start",
     "build": "yarn workspace @csb/strapi-cms build",
     "strapi": "yarn workspace @csb/strapi-cms strapi",
-    "build-plugins": "yarn workspace @csb/strapi-plugin-next-builder-connector build && yarn workspace @csb/strapi-plugin-azure-integrations build"
+    "build-plugins": "yarn workspace @csb/strapi-plugin-next-builder-connector build && yarn workspace @csb/strapi-plugin-azure-integrations build",
+    "build-cms": "yarn build-plugins && yarn build"
   },
   "author": {
     "name": "A Strapi developer"

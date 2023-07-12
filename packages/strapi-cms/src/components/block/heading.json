@@ -1,12 +1,20 @@
 {
   "collectionName": "components_block_headings",
   "info": {
-    "displayName": "Heading"
+    "displayName": "Heading",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "content": {
-      "type": "richtext"
+    "metadataLayout": {
+      "type": "component",
+      "repeatable": false,
+      "component": "metadata.layout"
+    },
+    "layout": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::layout.layout"
     }
   }
 }

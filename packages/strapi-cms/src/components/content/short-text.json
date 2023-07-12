@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_content_short_texts",
+  "info": {
+    "displayName": "Short Text",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "targets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::slot.slot"
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}
