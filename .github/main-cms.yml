@@ -1,0 +1,41 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy Node.js app to Azure Web App - bingdental-dev-cms
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - packages/strapi-cms/*
+      - .github/workflows/main-cms.yml
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout GiHub Action"
+        uses: actions/checkout@v3
+
+      - name: "Login via Azure CLI"
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: "Login Azure Container Registry with Azure CLI"
+        run: |
+          az acr login --name ${{ secrets.ACR_NAME }}
+
+      - name: "Build and publish image"
+        run: |
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ secrets.REGISTRY_REPO_NAME }}
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ secrets.REGISTRY_REPO_NAME }}
+        working-directory: packages/strapi-cms
