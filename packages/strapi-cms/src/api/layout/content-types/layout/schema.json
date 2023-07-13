@@ -40,6 +40,7 @@
       "type": "dynamiczone",
       "components": [
         "block.layout",
+        "block.page",
         "block.heading",
         "block.site-logo",
         "block.site-title"
