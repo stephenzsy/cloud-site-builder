@@ -10,11 +10,6 @@
       "type": "component",
       "repeatable": false,
       "component": "metadata.layout"
-    },
-    "layout": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::layout.layout"
     }
   }
 }

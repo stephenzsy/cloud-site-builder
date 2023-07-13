@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_block_layouts",
+  "info": {
+    "displayName": "Layout"
+  },
+  "options": {},
+  "attributes": {
+    "metadataLayout": {
+      "type": "component",
+      "repeatable": false,
+      "component": "metadata.layout"
+    },
+    "layout": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::layout.layout"
+    }
+  }
+}

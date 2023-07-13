@@ -39,6 +39,7 @@
     "blocks": {
       "type": "dynamiczone",
       "components": [
+        "block.layout",
         "block.heading",
         "block.site-logo",
         "block.site-title"
