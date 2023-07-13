@@ -10,6 +10,7 @@
   "dependencies": {
     "@azure/identity": "^3.2.3",
     "@azure/keyvault-secrets": "^4.7.0",
+    "@azure/storage-blob": "^12.14.0",
     "@strapi/design-system": "^1.6.3",
     "@strapi/helper-plugin": "^4.6.0",
     "@strapi/icons": "^1.6.3",
