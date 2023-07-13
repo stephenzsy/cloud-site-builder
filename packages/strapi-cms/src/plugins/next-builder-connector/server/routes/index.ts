@@ -1,10 +1,17 @@
 export default [
   {
-    method: 'GET',
-    path: '/',
-    handler: 'myController.index',
+    method: "GET",
+    path: "/token",
+    handler: "token.getToken",
     config: {
-      policies: [],
+      policies: [
+        {
+          name: "admin::hasPermissions",
+          config: {
+            actions: ["plugin::next-builder-connector.preview"],
+          },
+        },
+      ],
     },
   },
 ];

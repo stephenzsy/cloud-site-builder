@@ -6,12 +6,11 @@ export default function pluginsConfig({ env }) {
       config: {
         blobUploadContainerUrl: env("UPLOAD_AZURE_STORAGE_BLOB_CONTAINER_URL"),
         blobUploadPrefix: env("UPLOAD_AZURE_STORAGE_BLOB_PREFIX", ""),
-      }
+      },
     },
-    /*
-    'next-builder-connector': {
+    "next-builder-connector": {
       enabled: true,
-      resolve: './src/plugins/next-builder-connector'
-    },*/
+      resolve: "./src/plugins/next-builder-connector",
+    },
   };
 }

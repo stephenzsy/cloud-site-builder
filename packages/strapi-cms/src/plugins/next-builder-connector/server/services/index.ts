@@ -1,5 +1,5 @@
-import myService from './my-service';
+import jwt from "./jwt";
 
 export default {
-  myService,
+  jwt,
 };

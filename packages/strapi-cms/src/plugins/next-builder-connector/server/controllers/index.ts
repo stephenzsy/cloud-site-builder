@@ -1,5 +1,5 @@
-import myController from './my-controller';
+import token from "./token";
 
 export default {
-  myController,
+  token,
 };
