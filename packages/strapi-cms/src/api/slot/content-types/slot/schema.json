@@ -19,6 +19,12 @@
     },
     "name": {
       "type": "string"
+    },
+    "blocks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::block.block",
+      "mappedBy": "slot"
     }
   }
 }

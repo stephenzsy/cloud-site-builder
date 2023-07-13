@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_block_composes",
+  "info": {
+    "displayName": "compose",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "string"
+    },
+    "twClass": {
+      "type": "string"
+    },
+    "block": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::block.block"
+    },
+    "specialSlot": {
+      "type": "enumeration",
+      "enum": ["page"]
+    }
+  }
+}

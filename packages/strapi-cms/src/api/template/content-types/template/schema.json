@@ -18,12 +18,12 @@
     "siteLayout": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::layout.layout"
+      "target": "api::block.block"
     },
     "pageLayout": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::layout.layout"
+      "target": "api::block.block"
     }
   }
 }

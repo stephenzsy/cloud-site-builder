@@ -6,6 +6,9 @@
   },
   "options": {},
   "attributes": {
+    "description": {
+      "type": "string"
+    },
     "targets": {
       "type": "relation",
       "relation": "oneToMany",

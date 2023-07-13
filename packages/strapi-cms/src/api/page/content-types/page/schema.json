@@ -47,7 +47,8 @@
       },
       "type": "dynamiczone",
       "components": [
-        "content.short-text"
+        "content.short-text",
+        "content.svg-icon"
       ]
     }
   }
