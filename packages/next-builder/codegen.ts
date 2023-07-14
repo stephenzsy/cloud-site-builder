@@ -1,7 +1,7 @@
 import { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
-  schema: "../next-builder/schema.graphql",
+  schema: "../strapi-cms/schema.graphql",
   documents: [
     "app/**/*.tsx",
     "app/**/*.ts",

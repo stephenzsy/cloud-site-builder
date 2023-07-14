@@ -38,7 +38,6 @@ export type Block = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   htmlTag?: Maybe<Enum_Block_Htmltag>;
   name?: Maybe<Scalars['String']['output']>;
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
   slot?: Maybe<SlotEntityResponse>;
   twClass?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -77,7 +76,6 @@ export type BlockFiltersInput = {
   name?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<BlockFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<BlockFiltersInput>>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
   slot?: InputMaybe<SlotFiltersInput>;
   twClass?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
@@ -87,7 +85,6 @@ export type BlockInput = {
   children?: InputMaybe<Array<InputMaybe<ComponentBlockComposeInput>>>;
   htmlTag?: InputMaybe<Enum_Block_Htmltag>;
   name?: InputMaybe<Scalars['String']['input']>;
-  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   slot?: InputMaybe<Scalars['ID']['input']>;
   twClass?: InputMaybe<Scalars['String']['input']>;
 };
@@ -160,7 +157,6 @@ export type ComponentContentShortText = {
 export type ComponentContentShortTextTargetsArgs = {
   filters?: InputMaybe<SlotFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -194,7 +190,6 @@ export type ComponentContentSvgIcon = {
 export type ComponentContentSvgIconTargetsArgs = {
   filters?: InputMaybe<SlotFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -798,7 +793,6 @@ export type Page = {
   locale?: Maybe<Scalars['String']['output']>;
   localizations?: Maybe<PageRelationResponseCollection>;
   name?: Maybe<Scalars['String']['output']>;
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
   site?: Maybe<SiteEntityResponse>;
   slug?: Maybe<Scalars['String']['output']>;
   template?: Maybe<TemplateEntityResponse>;
@@ -809,7 +803,6 @@ export type Page = {
 export type PageLocalizationsArgs = {
   filters?: InputMaybe<PageFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -841,7 +834,6 @@ export type PageFiltersInput = {
   name?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<PageFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<PageFiltersInput>>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
   site?: InputMaybe<SiteFiltersInput>;
   slug?: InputMaybe<StringFilterInput>;
   template?: InputMaybe<TemplateFiltersInput>;
@@ -851,7 +843,6 @@ export type PageFiltersInput = {
 export type PageInput = {
   content?: InputMaybe<Array<Scalars['PageContentDynamicZoneInput']['input']>>;
   name?: InputMaybe<Scalars['String']['input']>;
-  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   site?: InputMaybe<Scalars['ID']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   template?: InputMaybe<Scalars['ID']['input']>;
@@ -917,7 +908,6 @@ export type QueryBlockArgs = {
 export type QueryBlocksArgs = {
   filters?: InputMaybe<BlockFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -949,7 +939,6 @@ export type QueryPagesArgs = {
   filters?: InputMaybe<PageFiltersInput>;
   locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -964,7 +953,6 @@ export type QuerySitesArgs = {
   filters?: InputMaybe<SiteFiltersInput>;
   locale?: InputMaybe<Scalars['I18NLocaleCode']['input']>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -977,7 +965,6 @@ export type QuerySlotArgs = {
 export type QuerySlotsArgs = {
   filters?: InputMaybe<SlotFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -990,7 +977,6 @@ export type QueryTemplateArgs = {
 export type QueryTemplatesArgs = {
   filters?: InputMaybe<TemplateFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -1055,7 +1041,6 @@ export type Site = {
   localizations?: Maybe<SiteRelationResponseCollection>;
   name?: Maybe<Scalars['String']['output']>;
   pages?: Maybe<PageRelationResponseCollection>;
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
   template?: Maybe<TemplateEntityResponse>;
   uid?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1065,7 +1050,6 @@ export type Site = {
 export type SiteLocalizationsArgs = {
   filters?: InputMaybe<SiteFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -1073,7 +1057,6 @@ export type SiteLocalizationsArgs = {
 export type SitePagesArgs = {
   filters?: InputMaybe<PageFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -1106,7 +1089,6 @@ export type SiteFiltersInput = {
   not?: InputMaybe<SiteFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<SiteFiltersInput>>>;
   pages?: InputMaybe<PageFiltersInput>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
   template?: InputMaybe<TemplateFiltersInput>;
   uid?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
@@ -1116,7 +1098,6 @@ export type SiteInput = {
   content?: InputMaybe<Array<Scalars['SiteContentDynamicZoneInput']['input']>>;
   name?: InputMaybe<Scalars['String']['input']>;
   pages?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   template?: InputMaybe<Scalars['ID']['input']>;
   uid?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1131,7 +1112,6 @@ export type Slot = {
   blocks?: Maybe<BlockRelationResponseCollection>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   name?: Maybe<Scalars['String']['output']>;
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
   uid: Scalars['String']['output'];
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -1140,7 +1120,6 @@ export type Slot = {
 export type SlotBlocksArgs = {
   filters?: InputMaybe<BlockFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -1169,7 +1148,6 @@ export type SlotFiltersInput = {
   name?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<SlotFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<SlotFiltersInput>>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
   uid?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
@@ -1177,7 +1155,6 @@ export type SlotFiltersInput = {
 export type SlotInput = {
   blocks?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   name?: InputMaybe<Scalars['String']['input']>;
-  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   uid?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1215,7 +1192,6 @@ export type Template = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   pageLayout?: Maybe<BlockEntityResponse>;
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
   siteLayout?: Maybe<BlockEntityResponse>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -1245,7 +1221,6 @@ export type TemplateFiltersInput = {
   not?: InputMaybe<TemplateFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<TemplateFiltersInput>>>;
   pageLayout?: InputMaybe<BlockFiltersInput>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
   siteLayout?: InputMaybe<BlockFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
@@ -1253,7 +1228,6 @@ export type TemplateFiltersInput = {
 export type TemplateInput = {
   name?: InputMaybe<Scalars['String']['input']>;
   pageLayout?: InputMaybe<Scalars['ID']['input']>;
-  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   siteLayout?: InputMaybe<Scalars['ID']['input']>;
 };
 

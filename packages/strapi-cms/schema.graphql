@@ -7,7 +7,6 @@ type Block {
   createdAt: DateTime
   htmlTag: ENUM_BLOCK_HTMLTAG
   name: String
-  publishedAt: DateTime
   slot: SlotEntityResponse
   twClass: String
   updatedAt: DateTime
@@ -36,7 +35,6 @@ input BlockFiltersInput {
   name: StringFilterInput
   not: BlockFiltersInput
   or: [BlockFiltersInput]
-  publishedAt: DateTimeFilterInput
   slot: SlotFiltersInput
   twClass: StringFilterInput
   updatedAt: DateTimeFilterInput
@@ -46,7 +44,6 @@ input BlockInput {
   children: [ComponentBlockComposeInput]
   htmlTag: ENUM_BLOCK_HTMLTAG
   name: String
-  publishedAt: DateTime
   slot: ID
   twClass: String
 }
@@ -108,7 +105,7 @@ input ComponentBlockComposeInput {
 type ComponentContentShortText {
   description: String
   id: ID!
-  targets(filters: SlotFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): SlotRelationResponseCollection
+  targets(filters: SlotFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SlotRelationResponseCollection
   value: String
 }
 
@@ -133,7 +130,7 @@ type ComponentContentSvgIcon {
   height: Int!
   iconPathData: JSON!
   id: ID!
-  targets(filters: SlotFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): SlotRelationResponseCollection
+  targets(filters: SlotFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SlotRelationResponseCollection
   width: Int!
 }
 
@@ -526,9 +523,8 @@ type Page {
   content: [PageContentDynamicZone]
   createdAt: DateTime
   locale: String
-  localizations(filters: PageFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): PageRelationResponseCollection
+  localizations(filters: PageFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): PageRelationResponseCollection
   name: String
-  publishedAt: DateTime
   site: SiteEntityResponse
   slug: String
   template: TemplateEntityResponse
@@ -562,7 +558,6 @@ input PageFiltersInput {
   name: StringFilterInput
   not: PageFiltersInput
   or: [PageFiltersInput]
-  publishedAt: DateTimeFilterInput
   site: SiteFiltersInput
   slug: StringFilterInput
   template: TemplateFiltersInput
@@ -572,7 +567,6 @@ input PageFiltersInput {
 input PageInput {
   content: [PageContentDynamicZoneInput!]
   name: String
-  publishedAt: DateTime
   site: ID
   slug: String
   template: ID
@@ -603,19 +597,19 @@ enum PublicationState {
 
 type Query {
   block(id: ID): BlockEntityResponse
-  blocks(filters: BlockFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlockEntityResponseCollection
+  blocks(filters: BlockFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): BlockEntityResponseCollection
   globalDefault(publicationState: PublicationState = LIVE): GlobalDefaultEntityResponse
   i18NLocale(id: ID): I18NLocaleEntityResponse
   i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
   me: UsersPermissionsMe
   page(id: ID, locale: I18NLocaleCode): PageEntityResponse
-  pages(filters: PageFiltersInput, locale: I18NLocaleCode, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): PageEntityResponseCollection
+  pages(filters: PageFiltersInput, locale: I18NLocaleCode, pagination: PaginationArg = {}, sort: [String] = []): PageEntityResponseCollection
   site(id: ID, locale: I18NLocaleCode): SiteEntityResponse
-  sites(filters: SiteFiltersInput, locale: I18NLocaleCode, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): SiteEntityResponseCollection
+  sites(filters: SiteFiltersInput, locale: I18NLocaleCode, pagination: PaginationArg = {}, sort: [String] = []): SiteEntityResponseCollection
   slot(id: ID): SlotEntityResponse
-  slots(filters: SlotFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): SlotEntityResponseCollection
+  slots(filters: SlotFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SlotEntityResponseCollection
   template(id: ID): TemplateEntityResponse
-  templates(filters: TemplateFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): TemplateEntityResponseCollection
+  templates(filters: TemplateFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): TemplateEntityResponseCollection
   uploadFile(id: ID): UploadFileEntityResponse
   uploadFiles(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileEntityResponseCollection
   uploadFolder(id: ID): UploadFolderEntityResponse
@@ -634,10 +628,9 @@ type Site {
   content: [SiteContentDynamicZone]
   createdAt: DateTime
   locale: String
-  localizations(filters: SiteFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): SiteRelationResponseCollection
+  localizations(filters: SiteFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SiteRelationResponseCollection
   name: String
-  pages(filters: PageFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): PageRelationResponseCollection
-  publishedAt: DateTime
+  pages(filters: PageFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): PageRelationResponseCollection
   template: TemplateEntityResponse
   uid: String
   updatedAt: DateTime
@@ -671,7 +664,6 @@ input SiteFiltersInput {
   not: SiteFiltersInput
   or: [SiteFiltersInput]
   pages: PageFiltersInput
-  publishedAt: DateTimeFilterInput
   template: TemplateFiltersInput
   uid: StringFilterInput
   updatedAt: DateTimeFilterInput
@@ -681,7 +673,6 @@ input SiteInput {
   content: [SiteContentDynamicZoneInput!]
   name: String
   pages: [ID]
-  publishedAt: DateTime
   template: ID
   uid: String
 }
@@ -691,10 +682,9 @@ type SiteRelationResponseCollection {
 }
 
 type Slot {
-  blocks(filters: BlockFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlockRelationResponseCollection
+  blocks(filters: BlockFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): BlockRelationResponseCollection
   createdAt: DateTime
   name: String
-  publishedAt: DateTime
   uid: String!
   updatedAt: DateTime
 }
@@ -721,7 +711,6 @@ input SlotFiltersInput {
   name: StringFilterInput
   not: SlotFiltersInput
   or: [SlotFiltersInput]
-  publishedAt: DateTimeFilterInput
   uid: StringFilterInput
   updatedAt: DateTimeFilterInput
 }
@@ -729,7 +718,6 @@ input SlotFiltersInput {
 input SlotInput {
   blocks: [ID]
   name: String
-  publishedAt: DateTime
   uid: String
 }
 
@@ -765,7 +753,6 @@ type Template {
   createdAt: DateTime
   name: String
   pageLayout: BlockEntityResponse
-  publishedAt: DateTime
   siteLayout: BlockEntityResponse
   updatedAt: DateTime
 }
@@ -792,7 +779,6 @@ input TemplateFiltersInput {
   not: TemplateFiltersInput
   or: [TemplateFiltersInput]
   pageLayout: BlockFiltersInput
-  publishedAt: DateTimeFilterInput
   siteLayout: BlockFiltersInput
   updatedAt: DateTimeFilterInput
 }
@@ -800,7 +786,6 @@ input TemplateFiltersInput {
 input TemplateInput {
   name: String
   pageLayout: ID
-  publishedAt: DateTime
   siteLayout: ID
 }
 
