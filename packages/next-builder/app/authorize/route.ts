@@ -20,5 +20,5 @@ export function GET(request: NextRequest) {
     path: "/",
   });
 
-  redirect(`/preview/${siteId}/draft`, RedirectType.replace);
+  redirect(`/preview/${siteId}`, RedirectType.replace);
 }

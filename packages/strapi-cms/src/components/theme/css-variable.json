@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_theme_css_variables",
+  "info": {
+    "displayName": "CSS Variable"
+  },
+  "options": {},
+  "attributes": {
+    "entry": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

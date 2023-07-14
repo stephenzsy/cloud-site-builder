@@ -154,6 +154,23 @@ input ComponentContentSvgIconInput {
   width: Int
 }
 
+type ComponentThemeCssVariable {
+  entry: String!
+  id: ID!
+}
+
+input ComponentThemeCssVariableFiltersInput {
+  and: [ComponentThemeCssVariableFiltersInput]
+  entry: StringFilterInput
+  not: ComponentThemeCssVariableFiltersInput
+  or: [ComponentThemeCssVariableFiltersInput]
+}
+
+input ComponentThemeCssVariableInput {
+  entry: String
+  id: ID
+}
+
 """
 A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
@@ -260,7 +277,7 @@ input FloatFilterInput {
   startsWith: Float
 }
 
-union GenericMorph = Block | ComponentBlockCompose | ComponentContentShortText | ComponentContentSvgIcon | GlobalDefault | I18NLocale | Page | Site | Slot | Template | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph = Block | ComponentBlockCompose | ComponentContentShortText | ComponentContentSvgIcon | ComponentThemeCssVariable | GlobalDefault | I18NLocale | Page | Site | Slot | Template | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
 
 type GlobalDefault {
   createdAt: DateTime
@@ -751,6 +768,7 @@ input StringFilterInput {
 
 type Template {
   createdAt: DateTime
+  cssVariables(filters: ComponentThemeCssVariableFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentThemeCssVariable]
   name: String
   pageLayout: BlockEntityResponse
   siteLayout: BlockEntityResponse
@@ -774,6 +792,7 @@ type TemplateEntityResponseCollection {
 input TemplateFiltersInput {
   and: [TemplateFiltersInput]
   createdAt: DateTimeFilterInput
+  cssVariables: ComponentThemeCssVariableFiltersInput
   id: IDFilterInput
   name: StringFilterInput
   not: TemplateFiltersInput
@@ -784,6 +803,7 @@ input TemplateFiltersInput {
 }
 
 input TemplateInput {
+  cssVariables: [ComponentThemeCssVariableInput]
   name: String
   pageLayout: ID
   siteLayout: ID

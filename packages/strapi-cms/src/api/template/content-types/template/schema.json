@@ -24,6 +24,12 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::block.block"
+    },
+    "cssVariables": {
+      "displayName": "CSS Variable",
+      "type": "component",
+      "repeatable": true,
+      "component": "theme.css-variable"
     }
   }
 }
