@@ -39,6 +39,7 @@ export type Block = {
   htmlTag?: Maybe<Enum_Block_Htmltag>;
   name?: Maybe<Scalars['String']['output']>;
   slot?: Maybe<SlotEntityResponse>;
+  slotFlag?: Maybe<Enum_Block_Slotflag>;
   twClass?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -77,6 +78,7 @@ export type BlockFiltersInput = {
   not?: InputMaybe<BlockFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<BlockFiltersInput>>>;
   slot?: InputMaybe<SlotFiltersInput>;
+  slotFlag?: InputMaybe<StringFilterInput>;
   twClass?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
@@ -86,6 +88,7 @@ export type BlockInput = {
   htmlTag?: InputMaybe<Enum_Block_Htmltag>;
   name?: InputMaybe<Scalars['String']['input']>;
   slot?: InputMaybe<Scalars['ID']['input']>;
+  slotFlag?: InputMaybe<Enum_Block_Slotflag>;
   twClass?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -123,7 +126,6 @@ export type ComponentBlockCompose = {
   block?: Maybe<BlockEntityResponse>;
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  specialSlot?: Maybe<Enum_Componentblockcompose_Specialslot>;
   twClass?: Maybe<Scalars['String']['output']>;
 };
 
@@ -133,7 +135,6 @@ export type ComponentBlockComposeFiltersInput = {
   description?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<ComponentBlockComposeFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ComponentBlockComposeFiltersInput>>>;
-  specialSlot?: InputMaybe<StringFilterInput>;
   twClass?: InputMaybe<StringFilterInput>;
 };
 
@@ -141,7 +142,6 @@ export type ComponentBlockComposeInput = {
   block?: InputMaybe<Scalars['ID']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
-  specialSlot?: InputMaybe<Enum_Componentblockcompose_Specialslot>;
   twClass?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -288,7 +288,7 @@ export enum Enum_Block_Htmltag {
   Span = 'span'
 }
 
-export enum Enum_Componentblockcompose_Specialslot {
+export enum Enum_Block_Slotflag {
   Page = 'page'
 }
 
@@ -1687,15 +1687,15 @@ export type SiteInfoQueryVariables = Exact<{
 }>;
 
 
-export type SiteInfoQuery = { __typename?: 'Query', site?: { __typename?: 'SiteEntityResponse', data?: { __typename?: 'SiteEntity', attributes?: { __typename?: 'Site', template?: { __typename?: 'TemplateEntityResponse', data?: { __typename?: 'TemplateEntity', id?: string | null, attributes?: { __typename?: 'Template', siteLayout?: { __typename?: 'BlockEntityResponse', data?: { __typename?: 'BlockEntity', id?: string | null } | null } | null } | null } | null } | null } | null } | null } | null };
+export type SiteInfoQuery = { __typename?: 'Query', site?: { __typename?: 'SiteEntityResponse', data?: { __typename?: 'SiteEntity', attributes?: { __typename?: 'Site', template?: { __typename?: 'TemplateEntityResponse', data?: { __typename?: 'TemplateEntity', id?: string | null, attributes?: { __typename?: 'Template', siteLayout?: { __typename?: 'BlockEntityResponse', data?: { __typename?: 'BlockEntity', id?: string | null } | null } | null } | null } | null } | null, content?: Array<{ __typename?: 'ComponentContentShortText', description?: string | null, id: string, value?: string | null, targets?: { __typename?: 'SlotRelationResponseCollection', data: Array<{ __typename?: 'SlotEntity', id?: string | null }> } | null } | { __typename?: 'ComponentContentSvgIcon', description?: string | null, height: number, iconPathData: any, id: string, width: number, targets?: { __typename?: 'SlotRelationResponseCollection', data: Array<{ __typename?: 'SlotEntity', id?: string | null }> } | null } | { __typename?: 'Error' } | null> | null } | null } | null } | null };
 
 export type BlockQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
 }>;
 
 
-export type BlockQuery = { __typename?: 'Query', block?: { __typename?: 'BlockEntityResponse', data?: { __typename?: 'BlockEntity', attributes?: { __typename?: 'Block', htmlTag?: Enum_Block_Htmltag | null, twClass?: string | null, children?: Array<{ __typename?: 'ComponentBlockCompose', twClass?: string | null, specialSlot?: Enum_Componentblockcompose_Specialslot | null, block?: { __typename?: 'BlockEntityResponse', data?: { __typename?: 'BlockEntity', id?: string | null } | null } | null } | null> | null, slot?: { __typename?: 'SlotEntityResponse', data?: { __typename?: 'SlotEntity', id?: string | null } | null } | null } | null } | null } | null };
+export type BlockQuery = { __typename?: 'Query', block?: { __typename?: 'BlockEntityResponse', data?: { __typename?: 'BlockEntity', attributes?: { __typename?: 'Block', htmlTag?: Enum_Block_Htmltag | null, twClass?: string | null, slotFlag?: Enum_Block_Slotflag | null, children?: Array<{ __typename?: 'ComponentBlockCompose', twClass?: string | null, block?: { __typename?: 'BlockEntityResponse', data?: { __typename?: 'BlockEntity', id?: string | null } | null } | null } | null> | null, slot?: { __typename?: 'SlotEntityResponse', data?: { __typename?: 'SlotEntity', id?: string | null } | null } | null } | null } | null } | null };
 
 
-export const SiteInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SiteInfo"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"site"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"template"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"siteLayout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<SiteInfoQuery, SiteInfoQueryVariables>;
-export const BlockDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Block"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"block"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"htmlTag"}},{"kind":"Field","name":{"kind":"Name","value":"twClass"}},{"kind":"Field","name":{"kind":"Name","value":"children"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"twClass"}},{"kind":"Field","name":{"kind":"Name","value":"block"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"specialSlot"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slot"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlockQuery, BlockQueryVariables>;
+export const SiteInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SiteInfo"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"site"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"template"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"siteLayout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentContentShortText"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"value"}},{"kind":"Field","name":{"kind":"Name","value":"targets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentContentSvgIcon"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"iconPathData"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"targets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<SiteInfoQuery, SiteInfoQueryVariables>;
+export const BlockDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Block"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"block"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"htmlTag"}},{"kind":"Field","name":{"kind":"Name","value":"twClass"}},{"kind":"Field","name":{"kind":"Name","value":"children"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"twClass"}},{"kind":"Field","name":{"kind":"Name","value":"block"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"slot"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"slotFlag"}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlockQuery, BlockQueryVariables>;

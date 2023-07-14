@@ -1,10 +1,11 @@
 import Block from "@/components/Block";
+import { ComponentContentType } from "@/components/types";
 import { gql } from "@/lib/generated/gql";
 import { getGraphqlClient } from "@/lib/graphql-client";
 import { cookies } from "next/headers";
 import { PropsWithChildren } from "react";
 
-const queryGetSite = gql(`
+const QUERY_GET_SITE = gql(`
   query SiteInfo($id: ID) {
     site(id: $id) {
       data {
@@ -21,13 +22,37 @@ const queryGetSite = gql(`
               }
             }
           }
+          content {
+            ... on ComponentContentShortText {
+              description
+              id
+              value
+              targets {
+                data {
+                    id
+                }
+              }
+            }
+            ... on ComponentContentSvgIcon {
+              description
+              height
+              iconPathData
+              id
+              width
+              targets {
+                data {
+                    id
+                }
+              }
+            }
+          }
         }
       }
     }
   }
 `);
 
-export default async function DraftLayout({
+export default async function SiteLayout({
   children,
   params,
 }: PropsWithChildren<{ params: { siteId?: string } }>) {
@@ -37,24 +62,21 @@ export default async function DraftLayout({
     return <div>No token or siteId to fetch data</div>;
   }
   const client = getGraphqlClient(token);
-  const erSite = await client.query({
-    query: queryGetSite,
+  const siteAttributes = (await client.query({
+    query: QUERY_GET_SITE,
     variables: {
       id: siteId,
     },
-  });
-  const blockId =
-    erSite.data.site?.data?.attributes?.template?.data?.attributes?.siteLayout
+  })).data.site?.data?.attributes;
+  const blockId = siteAttributes?.template?.data?.attributes?.siteLayout
       ?.data?.id;
   if (!blockId) {
     return <div>No site layout specified</div>;
   }
   return (
-    <>
-      <Block id={blockId} client={client} isSiteLayout />
-      <style jsx>
-        {}
-      </style>
-    </>
+    <Block id={blockId} client={client} content={siteAttributes?.content as unknown as ComponentContentType[]}>
+      {children}
+      <style>{`:root{}`}</style>
+    </Block>
   );
 }

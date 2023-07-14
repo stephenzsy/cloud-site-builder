@@ -2,6 +2,8 @@ import { gql } from "@/lib/generated";
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import classNames from "classnames";
 import { Fragment, PropsWithChildren } from "react";
+import { ComponentContentType } from "./types";
+import { SelectSlotWithContent } from "./Slot";
 
 const getBlockQuery = gql(`
 query Block($id: ID) {
@@ -17,13 +19,13 @@ query Block($id: ID) {
               id
             }
           }
-          specialSlot
         }
         slot {
           data {
             id
           }
         }
+        slotFlag
       }
     }
   }
@@ -33,13 +35,13 @@ export default async function Block({
   id,
   client,
   className,
-  isSiteLayout,
   children,
+  content,
 }: PropsWithChildren<{
   id: string;
   client: ApolloClient<NormalizedCacheObject>;
   className?: string;
-  isSiteLayout?: boolean;
+  content?: ComponentContentType[] | null;
 }>) {
   const blockAttributes = (
     await client.query({
@@ -47,30 +49,37 @@ export default async function Block({
       variables: { id },
     })
   ).data.block?.data?.attributes;
-  const { htmlTag, twClass, children: blockChildren } = blockAttributes ?? {};
+  const {
+    htmlTag,
+    twClass,
+    children: blockChildren,
+    slotFlag,
+    slot,
+  } = blockAttributes ?? {};
   const Tag = htmlTag || "div";
   return (
     <Tag className={classNames(className, twClass) || undefined}>
-      {blockChildren?.map((blockCompose, index) => {
-        if (blockCompose?.specialSlot) {
-          if (isSiteLayout) {
-            return <Fragment key={index}>{children}</Fragment>;
+      {slotFlag === "page" ? (
+        children
+      ) : slot?.data?.id ? (
+        <SelectSlotWithContent slotId={slot.data.id} content={content} />
+      ) : (
+        blockChildren?.map((blockCompose, index) => {
+          const childBlockId = blockCompose?.block?.data?.id;
+          if (!childBlockId) {
+            return null;
           }
-          return null;
-        }
-        const childBlockId = blockCompose?.block?.data?.id;
-        if (!childBlockId) {
-          return null;
-        }
-        return (
-          <Block
-            key={index}
-            id={childBlockId}
-            client={client}
-            className={blockCompose.twClass ?? undefined}
-          />
-        );
-      })}
+          return (
+            <Block
+              key={index}
+              id={childBlockId}
+              client={client}
+              className={blockCompose.twClass || undefined}
+              content={content}
+            />
+          );
+        })
+      )}
     </Tag>
   );
 }
