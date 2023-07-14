@@ -1,3 +1,5 @@
+import path from "path";
+
 export default function pluginsConfig({ env }) {
   return {
     "azure-integrations": {
@@ -11,6 +13,14 @@ export default function pluginsConfig({ env }) {
     "next-builder-connector": {
       enabled: true,
       resolve: "./src/plugins/next-builder-connector",
+    },
+    graphql: {
+      config: {
+        artifacts: {
+          schema: true,
+        },
+        generateArtifacts: true,
+      },
     },
   };
 }
