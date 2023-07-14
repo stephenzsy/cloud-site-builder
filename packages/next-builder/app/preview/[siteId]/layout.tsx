@@ -49,5 +49,12 @@ export default async function DraftLayout({
   if (!blockId) {
     return <div>No site layout specified</div>;
   }
-  return <Block id={blockId} client={client} isSiteLayout />;
+  return (
+    <>
+      <Block id={blockId} client={client} isSiteLayout />
+      <style jsx>
+        {}
+      </style>
+    </>
+  );
 }

@@ -213,6 +213,24 @@ export type ComponentContentSvgIconInput = {
   width?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type ComponentThemeCssVariable = {
+  __typename?: 'ComponentThemeCssVariable';
+  entry: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+};
+
+export type ComponentThemeCssVariableFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentThemeCssVariableFiltersInput>>>;
+  entry?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ComponentThemeCssVariableFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentThemeCssVariableFiltersInput>>>;
+};
+
+export type ComponentThemeCssVariableInput = {
+  entry?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
 export type DateFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
@@ -310,7 +328,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = Block | ComponentBlockCompose | ComponentContentShortText | ComponentContentSvgIcon | GlobalDefault | I18NLocale | Page | Site | Slot | Template | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = Block | ComponentBlockCompose | ComponentContentShortText | ComponentContentSvgIcon | ComponentThemeCssVariable | GlobalDefault | I18NLocale | Page | Site | Slot | Template | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type GlobalDefault = {
   __typename?: 'GlobalDefault';
@@ -1190,10 +1208,18 @@ export type StringFilterInput = {
 export type Template = {
   __typename?: 'Template';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  cssVariables?: Maybe<Array<Maybe<ComponentThemeCssVariable>>>;
   name?: Maybe<Scalars['String']['output']>;
   pageLayout?: Maybe<BlockEntityResponse>;
   siteLayout?: Maybe<BlockEntityResponse>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type TemplateCssVariablesArgs = {
+  filters?: InputMaybe<ComponentThemeCssVariableFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type TemplateEntity = {
@@ -1216,6 +1242,7 @@ export type TemplateEntityResponseCollection = {
 export type TemplateFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<TemplateFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
+  cssVariables?: InputMaybe<ComponentThemeCssVariableFiltersInput>;
   id?: InputMaybe<IdFilterInput>;
   name?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<TemplateFiltersInput>;
@@ -1226,6 +1253,7 @@ export type TemplateFiltersInput = {
 };
 
 export type TemplateInput = {
+  cssVariables?: InputMaybe<Array<InputMaybe<ComponentThemeCssVariableInput>>>;
   name?: InputMaybe<Scalars['String']['input']>;
   pageLayout?: InputMaybe<Scalars['ID']['input']>;
   siteLayout?: InputMaybe<Scalars['ID']['input']>;

@@ -16,10 +16,6 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::block.block"
-    },
-    "specialSlot": {
-      "type": "enumeration",
-      "enum": ["page"]
     }
   }
 }

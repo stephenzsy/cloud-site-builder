@@ -40,6 +40,12 @@
       "relation": "manyToOne",
       "target": "api::slot.slot",
       "inversedBy": "blocks"
+    },
+    "slotFlag": {
+      "type": "enumeration",
+      "enum": [
+        "page"
+      ]
     }
   }
 }

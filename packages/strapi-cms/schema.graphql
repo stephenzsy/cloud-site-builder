@@ -8,6 +8,7 @@ type Block {
   htmlTag: ENUM_BLOCK_HTMLTAG
   name: String
   slot: SlotEntityResponse
+  slotFlag: ENUM_BLOCK_SLOTFLAG
   twClass: String
   updatedAt: DateTime
 }
@@ -36,6 +37,7 @@ input BlockFiltersInput {
   not: BlockFiltersInput
   or: [BlockFiltersInput]
   slot: SlotFiltersInput
+  slotFlag: StringFilterInput
   twClass: StringFilterInput
   updatedAt: DateTimeFilterInput
 }
@@ -45,6 +47,7 @@ input BlockInput {
   htmlTag: ENUM_BLOCK_HTMLTAG
   name: String
   slot: ID
+  slotFlag: ENUM_BLOCK_SLOTFLAG
   twClass: String
 }
 
@@ -80,7 +83,6 @@ type ComponentBlockCompose {
   block: BlockEntityResponse
   description: String
   id: ID!
-  specialSlot: ENUM_COMPONENTBLOCKCOMPOSE_SPECIALSLOT
   twClass: String
 }
 
@@ -90,7 +92,6 @@ input ComponentBlockComposeFiltersInput {
   description: StringFilterInput
   not: ComponentBlockComposeFiltersInput
   or: [ComponentBlockComposeFiltersInput]
-  specialSlot: StringFilterInput
   twClass: StringFilterInput
 }
 
@@ -98,7 +99,6 @@ input ComponentBlockComposeInput {
   block: ID
   description: String
   id: ID
-  specialSlot: ENUM_COMPONENTBLOCKCOMPOSE_SPECIALSLOT
   twClass: String
 }
 
@@ -238,7 +238,7 @@ enum ENUM_BLOCK_HTMLTAG {
   span
 }
 
-enum ENUM_COMPONENTBLOCKCOMPOSE_SPECIALSLOT {
+enum ENUM_BLOCK_SLOTFLAG {
   page
 }
 
