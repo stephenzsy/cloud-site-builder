@@ -9,6 +9,9 @@ export function getGraphqlClient(token: string) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      fetchOptions: {
+        cache: "force-cache",
+      },
     }),
     ssrMode: true,
   });
