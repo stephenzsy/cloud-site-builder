@@ -20,6 +20,9 @@ const QUERY_GET_SITE = gql(`
                     id
                   }
                 }
+                cssVariables {
+                  entry
+                }
               }
             }
           }
@@ -71,11 +74,14 @@ export default async function SiteLayout({
       },
     })
   ).data.site?.data?.attributes;
-  const blockId =
-    siteAttributes?.template?.data?.attributes?.siteLayout?.data?.id;
+  const templateAttributes = siteAttributes?.template?.data?.attributes;
+  const blockId = templateAttributes?.siteLayout?.data?.id;
   if (!blockId) {
     return <div>No site layout specified</div>;
   }
+  const cssVariablesStyle = templateAttributes.cssVariables
+    ?.map((c) => c?.entry)
+    .join(";");
   return (
     <>
       <Block
@@ -85,30 +91,32 @@ export default async function SiteLayout({
       >
         {children}
       </Block>
-      {process.env.NODE_ENV === "production" && (
+      {(process.env.NODE_ENV === "production" || true) && (
         <>
           <Script
             src="https://cdn.tailwindcss.com"
             strategy="beforeInteractive"
           />
-          <Script id="tw-config">
+          <Script id="tw-config" strategy="beforeInteractive">
             {`
-      tailwind.config = { 
+      tailwind.config = {
         theme: {
-          colors: {
-            brand: {
-              50: "rgb(var(--color-brand-50) / <alpha-value>)",
-              100: "rgb(var(--color-brand-100) / <alpha-value>)",
-              200: "rgb(var(--color-brand-200) / <alpha-value>)",
-              300: "rgb(var(--color-brand-300) / <alpha-value>)",
-              400: "rgb(var(--color-brand-400) / <alpha-value>)",
-              500: "rgb(var(--color-brand-500) / <alpha-value>)",
-              600: "rgb(var(--color-brand-600) / <alpha-value>)",
-              700: "rgb(var(--color-brand-700) / <alpha-value>)",
-              800: "rgb(var(--color-brand-800) / <alpha-value>)",
-              900: "rgb(var(--color-brand-900) / <alpha-value>)",
-              950: "rgb(var(--color-brand-950) / <alpha-value>)",
-              DEFAULT: "rgb(var(--color-brand) / <alpha-value>)",
+          extend: {
+            colors: {
+              brand: {
+                50: "rgb(var(--color-brand-50) / <alpha-value>)",
+                100: "rgb(var(--color-brand-100) / <alpha-value>)",
+                200: "rgb(var(--color-brand-200) / <alpha-value>)",
+                300: "rgb(var(--color-brand-300) / <alpha-value>)",
+                400: "rgb(var(--color-brand-400) / <alpha-value>)",
+                500: "rgb(var(--color-brand-500) / <alpha-value>)",
+                600: "rgb(var(--color-brand-600) / <alpha-value>)",
+                700: "rgb(var(--color-brand-700) / <alpha-value>)",
+                800: "rgb(var(--color-brand-800) / <alpha-value>)",
+                900: "rgb(var(--color-brand-900) / <alpha-value>)",
+                950: "rgb(var(--color-brand-950) / <alpha-value>)",
+                DEFAULT: "rgb(var(--color-brand) / <alpha-value>)",
+              }
             }
           }
         }
@@ -116,7 +124,7 @@ export default async function SiteLayout({
           </Script>
         </>
       )}
-      <style>{`:root{}`}</style>
+      <style>{`:root{${cssVariablesStyle}}`}</style>
     </>
   );
 }

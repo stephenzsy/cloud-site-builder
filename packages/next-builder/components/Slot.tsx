@@ -1,12 +1,12 @@
-import ContentComponentSvgIcon from "./content/SvgIcon";
-import ContentComponentShortText from "./content/ShortText";
+import SvgIcon from "./content/SvgIcon";
+import ShortText from "./content/ShortText";
 import { ComponentContentType, ComponentContentTypeName } from "./types";
 
 const componentMapping: Partial<
   Record<ComponentContentTypeName, React.ComponentType<{ content: any }>>
 > = {
-  ComponentContentSvgIcon: ContentComponentSvgIcon,
-  ComponentContentShortText: ContentComponentShortText
+  ComponentContentSvgIcon: SvgIcon,
+  ComponentContentShortText: ShortText
 };
 
 export function SelectSlotWithContent({
