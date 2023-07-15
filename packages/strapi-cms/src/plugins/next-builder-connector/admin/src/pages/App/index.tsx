@@ -5,7 +5,7 @@
  *
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   SingleSelect,
   SingleSelectOption,
@@ -23,6 +23,11 @@ type QueryResult = {
   name: string;
 };
 
+type TokenResult = {
+  baseUrl: string;
+  token: string;
+};
+
 const App = () => {
   const { get } = useFetchClient();
   const { data, refetch } = useQuery<QueryResult[]>("get-sites", async () => {
@@ -36,17 +41,26 @@ const App = () => {
     data: tokenData,
     refetch: refetchToken,
     remove,
-  } = useQuery<QueryResult[]>(
+  } = useQuery<TokenResult>(
     "get-token",
     async () => {
-      const resp = await get("next-builder-connector/token");
-      console.log(resp);
-      return resp.data;
+      const { data } = await get("next-builder-connector/token");
+      return data;
     },
     { enabled: false }
   );
 
   const [siteId, setSiteId] = useState<string>();
+
+  const previewUrl = useMemo(() => {
+    if (!tokenData || !siteId) {
+      return undefined;
+    }
+    const url = new URL("authorize", tokenData.baseUrl);
+    url.searchParams.set("token", tokenData.token);
+    url.searchParams.set("siteId", siteId);
+    return url.toString();
+  }, [tokenData, siteId]);
 
   return (
     <Layout>
@@ -78,12 +92,25 @@ const App = () => {
                 </SingleSelectOption>
               ))}
             </SingleSelect>
-            <div>
-              <Button disabled={!siteId} onClick={() => {
-                refetchToken()
-              }}>
-                Preview
+            <div
+              style={{
+                display: "flex",
+                gap: 8,
+              }}
+            >
+              <Button
+                disabled={!siteId}
+                onClick={() => {
+                  refetchToken();
+                }}
+              >
+                Generate Preview Link
               </Button>
+              {previewUrl && (
+                <a href={previewUrl} target="_blank">
+                  Preview Link
+                </a>
+              )}
             </div>
             <div>
               <Button variant="danger" disabled={true}>

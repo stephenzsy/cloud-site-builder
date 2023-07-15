@@ -13,6 +13,9 @@ export default function pluginsConfig({ env }) {
     "next-builder-connector": {
       enabled: true,
       resolve: "./src/plugins/next-builder-connector",
+      config: {
+        previewSiteUrl: env("PREVIEW_SITE_URL")
+      }
     },
     graphql: {
       config: {
