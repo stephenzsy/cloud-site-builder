@@ -1,14 +1,14 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build CMS
+name: Build frontend preview
 
 on:
   push:
     branches:
       - main
     paths:
-      - packages/strapi-cms/**
+      - packages/next-builder/**
   workflow_dispatch:
 
 permissions:
@@ -32,7 +32,7 @@ jobs:
       - name: "Build and publish image"
         run: |
           az acr login --name ${{ secrets.ACR_NAME }}
-          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ secrets.REGISTRY_REPO_NAME }}
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ secrets.REGISTRY_REPO_NAME }}
-          az acr purge --filter "${{ secrets.REGISTRY_REPO_NAME }}:.*" --untagged --ago 5d
-        working-directory: packages/strapi-cms
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ secrets.REGISTRY_REPO_NAME_FE_PREVIEW }}
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ secrets.REGISTRY_REPO_NAME_FE_PREVIEW }}
+          az acr purge --filter "${{ secrets.REGISTRY_REPO_NAME_FE_PREVIEW }}:.*" --untagged --ago 5d
+        working-directory: packages/next-builder
