@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "sites",
+  "collectionName": "sections",
   "info": {
-    "singularName": "site",
-    "pluralName": "sites",
-    "displayName": "Site",
+    "singularName": "section",
+    "pluralName": "sections",
+    "displayName": "Section",
     "description": ""
   },
   "options": {
@@ -16,11 +16,7 @@
     }
   },
   "attributes": {
-    "uid": {
-      "type": "uid",
-      "targetField": "name"
-    },
-    "name": {
+    "description": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -28,11 +24,18 @@
         }
       }
     },
-    "pages": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::page.page",
-      "mappedBy": "site"
+    "template": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "placeholder"
+      ],
+      "default": "placeholder",
+      "required": true
     },
     "content": {
       "type": "component",

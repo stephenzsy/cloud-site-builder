@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_slot_contents",
+  "info": {
+    "displayName": "Content",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "string",
+      "description": "Not used for generating site"
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "slotName": {
+      "type": "string"
+    },
+    "textValue": {
+      "type": "string"
+    },
+    "svgIcon": {
+      "type": "component",
+      "repeatable": false,
+      "component": "content.svg-icon"
+    },
+    "section": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::section.section"
+    }
+  }
+}

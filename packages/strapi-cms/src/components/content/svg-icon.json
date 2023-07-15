@@ -1,29 +1,23 @@
 {
   "collectionName": "components_content_svg_icons",
   "info": {
-    "displayName": "SVG Icon"
+    "displayName": "SVG Icon",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "description": {
       "type": "string"
     },
-    "targets": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::slot.slot"
-    },
-    "width": {
-      "type": "integer",
-      "required": true,
-      "min": 1
-    },
-    "height": {
-      "type": "integer",
-      "min": 1,
+    "schema": {
+      "type": "enumeration",
+      "enum": [
+        "fontawesome"
+      ],
+      "default": "fontawesome",
       "required": true
     },
-    "iconPathData": {
+    "iconData": {
       "type": "json",
       "required": true
     }
