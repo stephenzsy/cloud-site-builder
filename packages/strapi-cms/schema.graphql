@@ -541,9 +541,8 @@ type Site {
   createdAt: DateTime
   locale: String
   localizations(filters: SiteFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SiteRelationResponseCollection
-  name: String
+  name: String!
   pages(filters: PageFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): PageRelationResponseCollection
-  uid: String
   updatedAt: DateTime
 }
 
@@ -572,7 +571,6 @@ input SiteFiltersInput {
   not: SiteFiltersInput
   or: [SiteFiltersInput]
   pages: PageFiltersInput
-  uid: StringFilterInput
   updatedAt: DateTimeFilterInput
 }
 
@@ -580,7 +578,6 @@ input SiteInput {
   content: [ComponentSlotContentInput]
   name: String
   pages: [ID]
-  uid: String
 }
 
 type SiteRelationResponseCollection {

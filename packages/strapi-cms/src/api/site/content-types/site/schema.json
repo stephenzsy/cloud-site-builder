@@ -16,12 +16,9 @@
     }
   },
   "attributes": {
-    "uid": {
-      "type": "uid",
-      "targetField": "name"
-    },
     "name": {
       "type": "string",
+      "required": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
