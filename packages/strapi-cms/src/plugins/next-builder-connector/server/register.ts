@@ -2,7 +2,7 @@ import { Strapi } from "@strapi/strapi";
 import { errors as strapiErrors } from "@strapi/utils";
 const { ForbiddenError, UnauthorizedError } = strapiErrors;
 
-const actionGroups = ["block", "page", "site", "slot", "template"];
+const actionGroups = ["section", "page", "site"];
 
 const actions = actionGroups.reduce<{ action: string }[]>(
   (prev, s) => [
@@ -10,7 +10,7 @@ const actions = actionGroups.reduce<{ action: string }[]>(
     { action: `api::${s}.${s}.find` },
     { action: `api::${s}.${s}.findOne` },
   ],
-  [{ action: "api::global-default.global-default.find" }]
+  []
 );
 
 export default async ({ strapi }: { strapi: Strapi }) => {

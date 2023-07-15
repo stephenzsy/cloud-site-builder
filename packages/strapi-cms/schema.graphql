@@ -2,59 +2,6 @@
 ### Do not make changes to this file directly
 
 
-type Block {
-  children(filters: ComponentBlockComposeFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentBlockCompose]
-  createdAt: DateTime
-  htmlTag: ENUM_BLOCK_HTMLTAG
-  name: String
-  slot: SlotEntityResponse
-  slotFlag: ENUM_BLOCK_SLOTFLAG
-  twClass: String
-  updatedAt: DateTime
-}
-
-type BlockEntity {
-  attributes: Block
-  id: ID
-}
-
-type BlockEntityResponse {
-  data: BlockEntity
-}
-
-type BlockEntityResponseCollection {
-  data: [BlockEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input BlockFiltersInput {
-  and: [BlockFiltersInput]
-  children: ComponentBlockComposeFiltersInput
-  createdAt: DateTimeFilterInput
-  htmlTag: StringFilterInput
-  id: IDFilterInput
-  name: StringFilterInput
-  not: BlockFiltersInput
-  or: [BlockFiltersInput]
-  slot: SlotFiltersInput
-  slotFlag: StringFilterInput
-  twClass: StringFilterInput
-  updatedAt: DateTimeFilterInput
-}
-
-input BlockInput {
-  children: [ComponentBlockComposeInput]
-  htmlTag: ENUM_BLOCK_HTMLTAG
-  name: String
-  slot: ID
-  slotFlag: ENUM_BLOCK_SLOTFLAG
-  twClass: String
-}
-
-type BlockRelationResponseCollection {
-  data: [BlockEntity!]!
-}
-
 input BooleanFilterInput {
   and: [Boolean]
   between: [Boolean]
@@ -79,96 +26,59 @@ input BooleanFilterInput {
   startsWith: Boolean
 }
 
-type ComponentBlockCompose {
-  block: BlockEntityResponse
-  description: String
-  id: ID!
-  twClass: String
-}
-
-input ComponentBlockComposeFiltersInput {
-  and: [ComponentBlockComposeFiltersInput]
-  block: BlockFiltersInput
-  description: StringFilterInput
-  not: ComponentBlockComposeFiltersInput
-  or: [ComponentBlockComposeFiltersInput]
-  twClass: StringFilterInput
-}
-
-input ComponentBlockComposeInput {
-  block: ID
-  description: String
-  id: ID
-  twClass: String
-}
-
-type ComponentContentShortText {
-  description: String
-  id: ID!
-  targets(filters: SlotFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SlotRelationResponseCollection
-  value: String
-}
-
-input ComponentContentShortTextFiltersInput {
-  and: [ComponentContentShortTextFiltersInput]
-  description: StringFilterInput
-  not: ComponentContentShortTextFiltersInput
-  or: [ComponentContentShortTextFiltersInput]
-  targets: SlotFiltersInput
-  value: StringFilterInput
-}
-
-input ComponentContentShortTextInput {
-  description: String
-  id: ID
-  targets: [ID]
-  value: String
-}
-
 type ComponentContentSvgIcon {
   description: String
-  height: Int!
-  iconPathData: JSON!
+  iconData: JSON!
   id: ID!
-  targets(filters: SlotFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SlotRelationResponseCollection
-  width: Int!
+  schema: ENUM_COMPONENTCONTENTSVGICON_SCHEMA!
 }
 
 input ComponentContentSvgIconFiltersInput {
   and: [ComponentContentSvgIconFiltersInput]
   description: StringFilterInput
-  height: IntFilterInput
-  iconPathData: JSONFilterInput
+  iconData: JSONFilterInput
   not: ComponentContentSvgIconFiltersInput
   or: [ComponentContentSvgIconFiltersInput]
-  targets: SlotFiltersInput
-  width: IntFilterInput
+  schema: StringFilterInput
 }
 
 input ComponentContentSvgIconInput {
   description: String
-  height: Int
-  iconPathData: JSON
+  iconData: JSON
   id: ID
-  targets: [ID]
-  width: Int
+  schema: ENUM_COMPONENTCONTENTSVGICON_SCHEMA
 }
 
-type ComponentThemeCssVariable {
-  entry: String!
+type ComponentSlotContent {
+  description: String
   id: ID!
+  section: SectionEntityResponse
+  slotName: String
+  svgIcon: ComponentContentSvgIcon
+  textValue: String
+  visible: Boolean
 }
 
-input ComponentThemeCssVariableFiltersInput {
-  and: [ComponentThemeCssVariableFiltersInput]
-  entry: StringFilterInput
-  not: ComponentThemeCssVariableFiltersInput
-  or: [ComponentThemeCssVariableFiltersInput]
+input ComponentSlotContentFiltersInput {
+  and: [ComponentSlotContentFiltersInput]
+  description: StringFilterInput
+  not: ComponentSlotContentFiltersInput
+  or: [ComponentSlotContentFiltersInput]
+  section: SectionFiltersInput
+  slotName: StringFilterInput
+  svgIcon: ComponentContentSvgIconFiltersInput
+  textValue: StringFilterInput
+  visible: BooleanFilterInput
 }
 
-input ComponentThemeCssVariableInput {
-  entry: String
+input ComponentSlotContentInput {
+  description: String
   id: ID
+  section: ID
+  slotName: String
+  svgIcon: ComponentContentSvgIconInput
+  textValue: String
+  visible: Boolean
 }
 
 """
@@ -229,17 +139,12 @@ input DateTimeFilterInput {
   startsWith: DateTime
 }
 
-enum ENUM_BLOCK_HTMLTAG {
-  div
-  footer
-  header
-  main
-  section
-  span
+enum ENUM_COMPONENTCONTENTSVGICON_SCHEMA {
+  fontawesome
 }
 
-enum ENUM_BLOCK_SLOTFLAG {
-  page
+enum ENUM_SECTION_TEMPLATE {
+  placeholder
 }
 
 type Error {
@@ -277,47 +182,7 @@ input FloatFilterInput {
   startsWith: Float
 }
 
-union GenericMorph = Block | ComponentBlockCompose | ComponentContentShortText | ComponentContentSvgIcon | ComponentThemeCssVariable | GlobalDefault | I18NLocale | Page | Site | Slot | Template | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
-
-type GlobalDefault {
-  createdAt: DateTime
-  publishedAt: DateTime
-  template: TemplateEntityResponse
-  updatedAt: DateTime
-}
-
-type GlobalDefaultEntity {
-  attributes: GlobalDefault
-  id: ID
-}
-
-type GlobalDefaultEntityResponse {
-  data: GlobalDefaultEntity
-}
-
-type GlobalDefaultEntityResponseCollection {
-  data: [GlobalDefaultEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input GlobalDefaultFiltersInput {
-  and: [GlobalDefaultFiltersInput]
-  createdAt: DateTimeFilterInput
-  not: GlobalDefaultFiltersInput
-  or: [GlobalDefaultFiltersInput]
-  publishedAt: DateTimeFilterInput
-  template: TemplateFiltersInput
-  updatedAt: DateTimeFilterInput
-}
-
-input GlobalDefaultInput {
-  publishedAt: DateTime
-  template: ID
-}
-
-type GlobalDefaultRelationResponseCollection {
-  data: [GlobalDefaultEntity!]!
-}
+union GenericMorph = ComponentContentSvgIcon | ComponentSlotContent | I18NLocale | Page | Section | Site | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
 
 type I18NLocale {
   code: String
@@ -472,13 +337,12 @@ input LongFilterInput {
 type Mutation {
   """Change user password. Confirm with the current password."""
   changePassword(currentPassword: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
-  createBlock(data: BlockInput!): BlockEntityResponse
   createPage(data: PageInput!, locale: I18NLocaleCode): PageEntityResponse
   createPageLocalization(data: PageInput, id: ID, locale: I18NLocaleCode): PageEntityResponse
+  createSection(data: SectionInput!, locale: I18NLocaleCode): SectionEntityResponse
+  createSectionLocalization(data: SectionInput, id: ID, locale: I18NLocaleCode): SectionEntityResponse
   createSite(data: SiteInput!, locale: I18NLocaleCode): SiteEntityResponse
   createSiteLocalization(data: SiteInput, id: ID, locale: I18NLocaleCode): SiteEntityResponse
-  createSlot(data: SlotInput!): SlotEntityResponse
-  createTemplate(data: TemplateInput!): TemplateEntityResponse
   createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
   createUploadFolder(data: UploadFolderInput!): UploadFolderEntityResponse
 
@@ -487,12 +351,9 @@ type Mutation {
 
   """Create a new user"""
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
-  deleteBlock(id: ID!): BlockEntityResponse
-  deleteGlobalDefault: GlobalDefaultEntityResponse
   deletePage(id: ID!, locale: I18NLocaleCode): PageEntityResponse
+  deleteSection(id: ID!, locale: I18NLocaleCode): SectionEntityResponse
   deleteSite(id: ID!, locale: I18NLocaleCode): SiteEntityResponse
-  deleteSlot(id: ID!): SlotEntityResponse
-  deleteTemplate(id: ID!): TemplateEntityResponse
   deleteUploadFile(id: ID!): UploadFileEntityResponse
   deleteUploadFolder(id: ID!): UploadFolderEntityResponse
 
@@ -518,13 +379,10 @@ type Mutation {
   Reset user password. Confirm with a code (resetToken from forgotPassword)
   """
   resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
-  updateBlock(data: BlockInput!, id: ID!): BlockEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
-  updateGlobalDefault(data: GlobalDefaultInput!): GlobalDefaultEntityResponse
   updatePage(data: PageInput!, id: ID!, locale: I18NLocaleCode): PageEntityResponse
+  updateSection(data: SectionInput!, id: ID!, locale: I18NLocaleCode): SectionEntityResponse
   updateSite(data: SiteInput!, id: ID!, locale: I18NLocaleCode): SiteEntityResponse
-  updateSlot(data: SlotInput!, id: ID!): SlotEntityResponse
-  updateTemplate(data: TemplateInput!, id: ID!): TemplateEntityResponse
   updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
   updateUploadFolder(data: UploadFolderInput!, id: ID!): UploadFolderEntityResponse
 
@@ -537,20 +395,15 @@ type Mutation {
 }
 
 type Page {
-  content: [PageContentDynamicZone]
+  content(filters: ComponentSlotContentFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSlotContent]
   createdAt: DateTime
   locale: String
   localizations(filters: PageFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): PageRelationResponseCollection
   name: String
   site: SiteEntityResponse
   slug: String
-  template: TemplateEntityResponse
   updatedAt: DateTime
 }
-
-union PageContentDynamicZone = ComponentContentShortText | ComponentContentSvgIcon | Error
-
-scalar PageContentDynamicZoneInput
 
 type PageEntity {
   attributes: Page
@@ -568,6 +421,7 @@ type PageEntityResponseCollection {
 
 input PageFiltersInput {
   and: [PageFiltersInput]
+  content: ComponentSlotContentFiltersInput
   createdAt: DateTimeFilterInput
   id: IDFilterInput
   locale: StringFilterInput
@@ -577,16 +431,14 @@ input PageFiltersInput {
   or: [PageFiltersInput]
   site: SiteFiltersInput
   slug: StringFilterInput
-  template: TemplateFiltersInput
   updatedAt: DateTimeFilterInput
 }
 
 input PageInput {
-  content: [PageContentDynamicZoneInput!]
+  content: [ComponentSlotContentInput]
   name: String
   site: ID
   slug: String
-  template: ID
 }
 
 type PageRelationResponseCollection {
@@ -613,20 +465,15 @@ enum PublicationState {
 }
 
 type Query {
-  block(id: ID): BlockEntityResponse
-  blocks(filters: BlockFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): BlockEntityResponseCollection
-  globalDefault(publicationState: PublicationState = LIVE): GlobalDefaultEntityResponse
   i18NLocale(id: ID): I18NLocaleEntityResponse
   i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
   me: UsersPermissionsMe
   page(id: ID, locale: I18NLocaleCode): PageEntityResponse
   pages(filters: PageFiltersInput, locale: I18NLocaleCode, pagination: PaginationArg = {}, sort: [String] = []): PageEntityResponseCollection
+  section(id: ID, locale: I18NLocaleCode): SectionEntityResponse
+  sections(filters: SectionFiltersInput, locale: I18NLocaleCode, pagination: PaginationArg = {}, sort: [String] = []): SectionEntityResponseCollection
   site(id: ID, locale: I18NLocaleCode): SiteEntityResponse
   sites(filters: SiteFiltersInput, locale: I18NLocaleCode, pagination: PaginationArg = {}, sort: [String] = []): SiteEntityResponseCollection
-  slot(id: ID): SlotEntityResponse
-  slots(filters: SlotFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SlotEntityResponseCollection
-  template(id: ID): TemplateEntityResponse
-  templates(filters: TemplateFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): TemplateEntityResponseCollection
   uploadFile(id: ID): UploadFileEntityResponse
   uploadFiles(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileEntityResponseCollection
   uploadFolder(id: ID): UploadFolderEntityResponse
@@ -641,21 +488,64 @@ type ResponseCollectionMeta {
   pagination: Pagination!
 }
 
+type Section {
+  content(filters: ComponentSlotContentFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSlotContent]
+  createdAt: DateTime
+  description: String
+  locale: String
+  localizations(filters: SectionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SectionRelationResponseCollection
+  template: ENUM_SECTION_TEMPLATE!
+  updatedAt: DateTime
+}
+
+type SectionEntity {
+  attributes: Section
+  id: ID
+}
+
+type SectionEntityResponse {
+  data: SectionEntity
+}
+
+type SectionEntityResponseCollection {
+  data: [SectionEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input SectionFiltersInput {
+  and: [SectionFiltersInput]
+  content: ComponentSlotContentFiltersInput
+  createdAt: DateTimeFilterInput
+  description: StringFilterInput
+  id: IDFilterInput
+  locale: StringFilterInput
+  localizations: SectionFiltersInput
+  not: SectionFiltersInput
+  or: [SectionFiltersInput]
+  template: StringFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input SectionInput {
+  content: [ComponentSlotContentInput]
+  description: String
+  template: ENUM_SECTION_TEMPLATE
+}
+
+type SectionRelationResponseCollection {
+  data: [SectionEntity!]!
+}
+
 type Site {
-  content: [SiteContentDynamicZone]
+  content(filters: ComponentSlotContentFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSlotContent]
   createdAt: DateTime
   locale: String
   localizations(filters: SiteFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SiteRelationResponseCollection
   name: String
   pages(filters: PageFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): PageRelationResponseCollection
-  template: TemplateEntityResponse
   uid: String
   updatedAt: DateTime
 }
-
-union SiteContentDynamicZone = ComponentContentShortText | ComponentContentSvgIcon | Error
-
-scalar SiteContentDynamicZoneInput
 
 type SiteEntity {
   attributes: Site
@@ -673,6 +563,7 @@ type SiteEntityResponseCollection {
 
 input SiteFiltersInput {
   and: [SiteFiltersInput]
+  content: ComponentSlotContentFiltersInput
   createdAt: DateTimeFilterInput
   id: IDFilterInput
   locale: StringFilterInput
@@ -681,65 +572,19 @@ input SiteFiltersInput {
   not: SiteFiltersInput
   or: [SiteFiltersInput]
   pages: PageFiltersInput
-  template: TemplateFiltersInput
   uid: StringFilterInput
   updatedAt: DateTimeFilterInput
 }
 
 input SiteInput {
-  content: [SiteContentDynamicZoneInput!]
+  content: [ComponentSlotContentInput]
   name: String
   pages: [ID]
-  template: ID
   uid: String
 }
 
 type SiteRelationResponseCollection {
   data: [SiteEntity!]!
-}
-
-type Slot {
-  blocks(filters: BlockFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): BlockRelationResponseCollection
-  createdAt: DateTime
-  name: String
-  uid: String!
-  updatedAt: DateTime
-}
-
-type SlotEntity {
-  attributes: Slot
-  id: ID
-}
-
-type SlotEntityResponse {
-  data: SlotEntity
-}
-
-type SlotEntityResponseCollection {
-  data: [SlotEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input SlotFiltersInput {
-  and: [SlotFiltersInput]
-  blocks: BlockFiltersInput
-  createdAt: DateTimeFilterInput
-  id: IDFilterInput
-  name: StringFilterInput
-  not: SlotFiltersInput
-  or: [SlotFiltersInput]
-  uid: StringFilterInput
-  updatedAt: DateTimeFilterInput
-}
-
-input SlotInput {
-  blocks: [ID]
-  name: String
-  uid: String
-}
-
-type SlotRelationResponseCollection {
-  data: [SlotEntity!]!
 }
 
 input StringFilterInput {
@@ -764,53 +609,6 @@ input StringFilterInput {
   null: Boolean
   or: [String]
   startsWith: String
-}
-
-type Template {
-  createdAt: DateTime
-  cssVariables(filters: ComponentThemeCssVariableFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentThemeCssVariable]
-  name: String
-  pageLayout: BlockEntityResponse
-  siteLayout: BlockEntityResponse
-  updatedAt: DateTime
-}
-
-type TemplateEntity {
-  attributes: Template
-  id: ID
-}
-
-type TemplateEntityResponse {
-  data: TemplateEntity
-}
-
-type TemplateEntityResponseCollection {
-  data: [TemplateEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input TemplateFiltersInput {
-  and: [TemplateFiltersInput]
-  createdAt: DateTimeFilterInput
-  cssVariables: ComponentThemeCssVariableFiltersInput
-  id: IDFilterInput
-  name: StringFilterInput
-  not: TemplateFiltersInput
-  or: [TemplateFiltersInput]
-  pageLayout: BlockFiltersInput
-  siteLayout: BlockFiltersInput
-  updatedAt: DateTimeFilterInput
-}
-
-input TemplateInput {
-  cssVariables: [ComponentThemeCssVariableInput]
-  name: String
-  pageLayout: ID
-  siteLayout: ID
-}
-
-type TemplateRelationResponseCollection {
-  data: [TemplateEntity!]!
 }
 
 """A time string with format HH:mm:ss.SSS"""
