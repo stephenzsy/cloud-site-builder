@@ -1,8 +1,9 @@
+import { getSiteLoader } from "@/lib/site-loader";
 import { supportedLocales } from "@/middleware";
-import "./globals.css";
-import type { Metadata, NextPageContext } from "next";
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { NextRouter } from "next/router";
+import "./globals.css";
+import { ComponentSlotContent } from "@/lib/models/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,16 +18,54 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function RootLayout({
+function mapSlots(
+  content: ComponentSlotContent[] | undefined
+): [ComponentSlotContent[], Record<string, ComponentSlotContent[]>] {
+  const namedSlots: Record<string, ComponentSlotContent[]> = {};
+  const defaultSlot: ComponentSlotContent[] = [];
+
+  if (content) {
+    for (const entry of content) {
+      if (entry.slotName) {
+        let namedSlot = namedSlots[entry.slotName];
+        if (!namedSlot) {
+          namedSlot = namedSlots[entry.slotName] = [];
+        }
+        namedSlot.push(entry);
+      } else {
+        defaultSlot.push(entry);
+      }
+    }
+  }
+  return [defaultSlot, namedSlots];
+}
+
+export default async function RootLayout({
   params,
   children,
 }: {
   params: { locale: string };
   children: React.ReactNode;
 }) {
+  const siteLoader = getSiteLoader();
+  const siteEntity = await siteLoader.getSiteAsync(
+    process.env.SITE_ID!,
+    params.locale
+  );
+  const content = siteEntity?.attributes?.content;
+  // map slot
+  const [defaultSlot, namedSlots] = mapSlots(siteEntity?.attributes?.content);
+
   return (
     <html lang={params.locale}>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <header className="flex flex-row">
+          {namedSlots["site-title"]?.map((slot, index) => {
+            return <h1 key={index}>{slot.textValue}</h1>;
+          })}
+        </header>
+        {children}
+      </body>
     </html>
   );
 }
