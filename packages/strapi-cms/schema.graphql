@@ -31,6 +31,7 @@ type ComponentContentSvgIcon {
   iconData: JSON!
   id: ID!
   schema: ENUM_COMPONENTCONTENTSVGICON_SCHEMA!
+  singleImage: UploadFileEntityResponse
 }
 
 input ComponentContentSvgIconFiltersInput {
@@ -47,6 +48,7 @@ input ComponentContentSvgIconInput {
   iconData: JSON
   id: ID
   schema: ENUM_COMPONENTCONTENTSVGICON_SCHEMA
+  singleImage: ID
 }
 
 type ComponentSlotContent {

@@ -20,6 +20,13 @@
     "iconData": {
       "type": "json",
       "required": true
+    },
+    "singleImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
