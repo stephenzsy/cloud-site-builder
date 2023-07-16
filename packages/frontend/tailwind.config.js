@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       colors: {
         brand: {
+          DEFAULT: "rgb(var(--color-brand) / <alpha-value>)",
           50: "rgb(var(--color-brand-50) / <alpha-value>)",
           100: "rgb(var(--color-brand-100) / <alpha-value>)",
           200: "rgb(var(--color-brand-200) / <alpha-value>)",
@@ -19,13 +20,12 @@ module.exports = {
           800: "rgb(var(--color-brand-800) / <alpha-value>)",
           900: "rgb(var(--color-brand-900) / <alpha-value>)",
           950: "rgb(var(--color-brand-950) / <alpha-value>)",
-          DEFAULT: "rgb(var(--color-brand) / <alpha-value>)",
-        },
-        brand_analogous_ccw_1: {
-          200: "hsl(var(--color-brand-analogous-ccw-1-200-hsl) / <alpha-value>)",
-        },
-        brand_analogous_cw_1: {
-          100: "hsl(var(--color-brand-analogous-cw-1-100-hsl) / <alpha-value>)",
+          h30: {
+            200: "rgb(var(--color-brand-h30-100) / <alpha-value>)",
+          },
+          h330: {
+            200: "rgb(var(--color-brand-h330-200) / <alpha-value>)",
+          },
         },
       },
     },

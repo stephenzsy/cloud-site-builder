@@ -35,7 +35,7 @@ function PageSectionSlot({
   if (section.attributes?.templateId === "hero-section") {
     const [, namedSlots] = mapSlots(section.attributes.content);
     return (
-      <section className="w-full h-[400px] border rounded-xl p-10 grid items-center justify-center bg-gradient-to-tr from-brand_analogous_ccw_1-200 from-10% via-brand-300 via-30% to-brand_analogous_cw_1-100 to-90%">
+      <section className="w-full h-[400px] border rounded-xl p-10 grid items-center justify-center bg-gradient-to-tr from-brand-h330-200 from-10% via-brand-300 via-30% to-brand-h30-100 to-90%">
         {namedSlots["hero-text"]?.map((c, index) => (
           <div className="text-3xl text-center text-semibold" key={index}>
             {c.textValue}
