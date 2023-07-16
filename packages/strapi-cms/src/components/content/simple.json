@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_content_simples",
+  "info": {
+    "displayName": "simple",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "richText": {
+      "type": "richtext"
+    },
+    "link": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::block.block"
+    }
+  }
+}

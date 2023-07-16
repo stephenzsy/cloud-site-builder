@@ -2,6 +2,63 @@
 ### Do not make changes to this file directly
 
 
+type Block {
+  componentType: String
+  createdAt: DateTime
+  description: String
+  locale: String
+  localizations(filters: BlockFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): BlockRelationResponseCollection
+  props: JSON
+  simple: ComponentContentSimple
+  slots(filters: ComponentSlotBlockFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSlotBlock]
+  type: ENUM_BLOCK_TYPE
+  updatedAt: DateTime
+}
+
+type BlockEntity {
+  attributes: Block
+  id: ID
+}
+
+type BlockEntityResponse {
+  data: BlockEntity
+}
+
+type BlockEntityResponseCollection {
+  data: [BlockEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input BlockFiltersInput {
+  and: [BlockFiltersInput]
+  componentType: StringFilterInput
+  createdAt: DateTimeFilterInput
+  description: StringFilterInput
+  id: IDFilterInput
+  locale: StringFilterInput
+  localizations: BlockFiltersInput
+  not: BlockFiltersInput
+  or: [BlockFiltersInput]
+  props: JSONFilterInput
+  simple: ComponentContentSimpleFiltersInput
+  slots: ComponentSlotBlockFiltersInput
+  type: StringFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input BlockInput {
+  componentType: String
+  description: String
+  props: JSON
+  simple: ComponentContentSimpleInput
+  slots: [ComponentSlotBlockInput]
+  type: ENUM_BLOCK_TYPE
+}
+
+type BlockRelationResponseCollection {
+  data: [BlockEntity!]!
+}
+
 input BooleanFilterInput {
   and: [Boolean]
   between: [Boolean]
@@ -26,6 +83,29 @@ input BooleanFilterInput {
   startsWith: Boolean
 }
 
+type ComponentContentSimple {
+  id: ID!
+  link: BlockEntityResponse
+  richText: String
+  text: String
+}
+
+input ComponentContentSimpleFiltersInput {
+  and: [ComponentContentSimpleFiltersInput]
+  link: BlockFiltersInput
+  not: ComponentContentSimpleFiltersInput
+  or: [ComponentContentSimpleFiltersInput]
+  richText: StringFilterInput
+  text: StringFilterInput
+}
+
+input ComponentContentSimpleInput {
+  id: ID
+  link: ID
+  richText: String
+  text: String
+}
+
 type ComponentContentSvgIcon {
   description: String
   iconData: JSON!
@@ -47,6 +127,52 @@ input ComponentContentSvgIconInput {
   iconData: JSON
   id: ID
   schema: ENUM_COMPONENTCONTENTSVGICON_SCHEMA
+}
+
+type ComponentSlotBlock {
+  block: BlockEntityResponse
+  description: String
+  id: ID!
+  simple: ComponentContentSimple
+  slotName: String
+}
+
+input ComponentSlotBlockFiltersInput {
+  and: [ComponentSlotBlockFiltersInput]
+  block: BlockFiltersInput
+  description: StringFilterInput
+  not: ComponentSlotBlockFiltersInput
+  or: [ComponentSlotBlockFiltersInput]
+  simple: ComponentContentSimpleFiltersInput
+  slotName: StringFilterInput
+}
+
+input ComponentSlotBlockInput {
+  block: ID
+  description: String
+  id: ID
+  simple: ComponentContentSimpleInput
+  slotName: String
+}
+
+type ComponentSlotContainer {
+  description: String
+  id: ID!
+  slotName: String
+}
+
+input ComponentSlotContainerFiltersInput {
+  and: [ComponentSlotContainerFiltersInput]
+  description: StringFilterInput
+  not: ComponentSlotContainerFiltersInput
+  or: [ComponentSlotContainerFiltersInput]
+  slotName: StringFilterInput
+}
+
+input ComponentSlotContainerInput {
+  description: String
+  id: ID
+  slotName: String
 }
 
 type ComponentSlotContent {
@@ -145,6 +271,12 @@ input DateTimeFilterInput {
   startsWith: DateTime
 }
 
+enum ENUM_BLOCK_TYPE {
+  generic
+  page
+  site
+}
+
 enum ENUM_COMPONENTCONTENTSVGICON_SCHEMA {
   custom
   fontawesome
@@ -185,7 +317,7 @@ input FloatFilterInput {
   startsWith: Float
 }
 
-union GenericMorph = ComponentContentSvgIcon | ComponentSlotContent | I18NLocale | Page | Section | Site | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph = Block | ComponentContentSimple | ComponentContentSvgIcon | ComponentSlotBlock | ComponentSlotContainer | ComponentSlotContent | I18NLocale | Page | Section | Site | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
 
 type I18NLocale {
   code: String
@@ -340,6 +472,8 @@ input LongFilterInput {
 type Mutation {
   """Change user password. Confirm with the current password."""
   changePassword(currentPassword: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
+  createBlock(data: BlockInput!, locale: I18NLocaleCode): BlockEntityResponse
+  createBlockLocalization(data: BlockInput, id: ID, locale: I18NLocaleCode): BlockEntityResponse
   createPage(data: PageInput!, locale: I18NLocaleCode): PageEntityResponse
   createPageLocalization(data: PageInput, id: ID, locale: I18NLocaleCode): PageEntityResponse
   createSection(data: SectionInput!, locale: I18NLocaleCode): SectionEntityResponse
@@ -354,6 +488,7 @@ type Mutation {
 
   """Create a new user"""
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
+  deleteBlock(id: ID!, locale: I18NLocaleCode): BlockEntityResponse
   deletePage(id: ID!, locale: I18NLocaleCode): PageEntityResponse
   deleteSection(id: ID!, locale: I18NLocaleCode): SectionEntityResponse
   deleteSite(id: ID!, locale: I18NLocaleCode): SiteEntityResponse
@@ -382,6 +517,7 @@ type Mutation {
   Reset user password. Confirm with a code (resetToken from forgotPassword)
   """
   resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
+  updateBlock(data: BlockInput!, id: ID!, locale: I18NLocaleCode): BlockEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updatePage(data: PageInput!, id: ID!, locale: I18NLocaleCode): PageEntityResponse
   updateSection(data: SectionInput!, id: ID!, locale: I18NLocaleCode): SectionEntityResponse
@@ -468,6 +604,8 @@ enum PublicationState {
 }
 
 type Query {
+  block(id: ID, locale: I18NLocaleCode): BlockEntityResponse
+  blocks(filters: BlockFiltersInput, locale: I18NLocaleCode, pagination: PaginationArg = {}, sort: [String] = []): BlockEntityResponseCollection
   i18NLocale(id: ID): I18NLocaleEntityResponse
   i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
   me: UsersPermissionsMe
