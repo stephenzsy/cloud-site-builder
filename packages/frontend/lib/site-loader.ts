@@ -17,14 +17,11 @@ export class GraphqlLiveSiteLoader implements SiteLoader {
           id
           attributes {
             locale
-            content {
+            content(filters: { visible: { eq: true } }) {
               slotName
               textValue
-              visible
               svgIcon {
-                description
                 iconData
-                id
                 schema
               }
               section {
@@ -33,6 +30,7 @@ export class GraphqlLiveSiteLoader implements SiteLoader {
                 }
               }
             }
+            cssVariables
             localizations {
               data {
                 id

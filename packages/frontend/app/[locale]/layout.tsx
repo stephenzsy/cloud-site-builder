@@ -1,10 +1,11 @@
+import { SlotContentSvgIcon } from "@/components/slot-content/svg-icon";
+import { ComponentSlotContent } from "@/lib/models/components";
 import { GraphqlLiveSiteLoader, SiteLoader } from "@/lib/site-loader";
 import { supportedLocales } from "@/middleware";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
-import { ComponentSlotContent } from "@/lib/models/components";
 import { cookies } from "next/headers";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -84,15 +85,26 @@ export default async function RootLayout({
   const [siteLoader, siteId] = loaderConfig;
   const siteEntity = await siteLoader.getSiteAsync(siteId, params.locale);
   // map slot
-  const [defaultSlot, namedSlots] = mapSlots(siteEntity?.attributes?.content);
-
+  const { cssVariables, content } = siteEntity?.attributes ?? {};
+  const cssLine = cssVariables && `:root{${cssVariables.join(";")}`;
+  const [defaultSlot, namedSlots] = mapSlots(content);
   return (
     <html lang={params.locale}>
       <body className={inter.className}>
-        <header className="flex flex-row">
-          {namedSlots["site-title"]?.map((slot, index) => {
-            return <h1 key={index}>{slot.textValue}</h1>;
-          })}
+        {cssLine && <style>{cssLine}</style>}
+        <header className="pt-safe pl-safe pr-safe">
+          <div className="flex flex-row p-4 items-center gap-2 mx-auto max-w-5xl">
+            <span className="text-6xl text-brand">
+              <SlotContentSvgIcon content={namedSlots["site-logo"]} />
+            </span>
+            {namedSlots["site-title"]?.map((slot, index) => {
+              return (
+                <h1 key={index} className="font-bold text-5xl text-brand">
+                  {slot.textValue}
+                </h1>
+              );
+            })}
+          </div>
         </header>
         {children}
       </body>
