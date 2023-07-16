@@ -143,10 +143,6 @@ enum ENUM_COMPONENTCONTENTSVGICON_SCHEMA {
   fontawesome
 }
 
-enum ENUM_SECTION_TEMPLATE {
-  placeholder
-}
-
 type Error {
   code: String!
   message: String
@@ -494,7 +490,7 @@ type Section {
   description: String
   locale: String
   localizations(filters: SectionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SectionRelationResponseCollection
-  template: ENUM_SECTION_TEMPLATE!
+  templateId: String!
   updatedAt: DateTime
 }
 
@@ -522,14 +518,14 @@ input SectionFiltersInput {
   localizations: SectionFiltersInput
   not: SectionFiltersInput
   or: [SectionFiltersInput]
-  template: StringFilterInput
+  templateId: StringFilterInput
   updatedAt: DateTimeFilterInput
 }
 
 input SectionInput {
   content: [ComponentSlotContentInput]
   description: String
-  template: ENUM_SECTION_TEMPLATE
+  templateId: String
 }
 
 type SectionRelationResponseCollection {
@@ -540,6 +536,7 @@ type Site {
   content(filters: ComponentSlotContentFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSlotContent]
   createdAt: DateTime
   cssVariables: JSON
+  homepage: PageEntityResponse
   locale: String
   localizations(filters: SiteFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SiteRelationResponseCollection
   name: String!
@@ -566,6 +563,7 @@ input SiteFiltersInput {
   content: ComponentSlotContentFiltersInput
   createdAt: DateTimeFilterInput
   cssVariables: JSONFilterInput
+  homepage: PageFiltersInput
   id: IDFilterInput
   locale: StringFilterInput
   localizations: SiteFiltersInput
@@ -579,6 +577,7 @@ input SiteFiltersInput {
 input SiteInput {
   content: [ComponentSlotContentInput]
   cssVariables: JSON
+  homepage: ID
   name: String
   pages: [ID]
 }

@@ -24,17 +24,13 @@
         }
       }
     },
-    "template": {
+     "templateId": {
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
       },
-      "type": "enumeration",
-      "enum": [
-        "placeholder"
-      ],
-      "default": "placeholder",
+      "type": "string",
       "required": true
     },
     "content": {

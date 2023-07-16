@@ -17,8 +17,13 @@
   },
   "attributes": {
     "slug": {
-      "type": "uid",
-      "targetField": "name"
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "regex": "[\\w-]+"
     },
     "name": {
       "type": "string",

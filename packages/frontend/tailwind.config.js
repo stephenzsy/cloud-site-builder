@@ -21,6 +21,12 @@ module.exports = {
           950: "rgb(var(--color-brand-950) / <alpha-value>)",
           DEFAULT: "rgb(var(--color-brand) / <alpha-value>)",
         },
+        brand_analogous_ccw_1: {
+          200: "rgb(var(--color-brand-analogous-ccw-1-200) / <alpha-value>)",
+        },
+        brand_analogous_cw_1: {
+          100: "rgb(var(--color-brand-analogous-cw-1-100) / <alpha-value>)",
+        }
       },
     },
   },
