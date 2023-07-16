@@ -45,7 +45,6 @@ export const middleware: NextMiddleware = (request) => {
     )
   ) {
     const userLocale = getLocale(request);
-    console.log(pathname, userLocale, supportedLocales);
     return NextResponse.redirect(
       new URL(`/${userLocale}/${pathname}`, request.url)
     );
@@ -53,5 +52,5 @@ export const middleware: NextMiddleware = (request) => {
 };
 
 export const config = {
-  matcher: ["/((?!_next|favicon.ico).*)"],
+  matcher: ["/((?!api|_next|favicon.ico).*)"],
 };

@@ -1,9 +1,10 @@
-import { getSiteLoader } from "@/lib/site-loader";
+import { GraphqlLiveSiteLoader, SiteLoader } from "@/lib/site-loader";
 import { supportedLocales } from "@/middleware";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ComponentSlotContent } from "@/lib/models/components";
+import { cookies } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,6 +41,17 @@ function mapSlots(
   return [defaultSlot, namedSlots];
 }
 
+function getLiveSiteLoader(): [SiteLoader, string] | undefined {
+  const token = cookies().get("StrapiToken")?.value.trim();
+  const siteId = cookies().get("StrapiSiteId")?.value.trim();
+  if (token && siteId) {
+    return [
+      new GraphqlLiveSiteLoader(process.env.STRAPI_CMS_GRAPHQL_URL!, token),
+      siteId,
+    ];
+  }
+}
+
 export default async function RootLayout({
   params,
   children,
@@ -47,11 +59,17 @@ export default async function RootLayout({
   params: { locale: string };
   children: React.ReactNode;
 }) {
-  const siteLoader = getSiteLoader();
-  const siteEntity = await siteLoader.getSiteAsync(
-    process.env.SITE_ID!,
-    params.locale
-  );
+  const loaderConfig =
+    process.env.CSB_FE_ROLE === "preview" ? getLiveSiteLoader() : undefined;
+  if (!loaderConfig) {
+    return (
+      <html lang={params.locale}>
+        <body>No site available</body>
+      </html>
+    );
+  }
+  const [siteLoader, siteId] = loaderConfig;
+  const siteEntity = await siteLoader.getSiteAsync(siteId, params.locale);
   const content = siteEntity?.attributes?.content;
   // map slot
   const [defaultSlot, namedSlots] = mapSlots(siteEntity?.attributes?.content);

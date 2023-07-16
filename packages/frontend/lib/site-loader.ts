@@ -2,6 +2,7 @@ import { GraphQLClient, gql } from "graphql-request";
 import { use } from "react";
 import { Entity, EntityResponse, ID } from "./models/common";
 import { Site } from "./models/site";
+import { cookies } from "next/dist/client/components/headers";
 
 export interface SiteLoader {
   getSiteAsync(id: string, locale: string): Promise<Entity<Site> | undefined>;
@@ -94,14 +95,4 @@ export class GraphqlLiveSiteLoader implements SiteLoader {
   public getPage(id: string): {} {
     return {};
   }
-}
-
-export function getSiteLoader(): SiteLoader {
-  if (process.env.STRAPI_TOKEN) {
-    return new GraphqlLiveSiteLoader(
-      process.env.STRAPI_CMS_GRAPHQL_URL!,
-      process.env.STRAPI_TOKEN
-    );
-  }
-  return undefined as any;
 }
