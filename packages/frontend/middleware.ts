@@ -45,6 +45,11 @@ export const middleware: NextMiddleware = (request) => {
     )
   ) {
     const userLocale = getLocale(request);
+    if (pathname === "/") {
+      return NextResponse.redirect(
+        new URL(`/${userLocale}`, request.url)
+      );
+    }
     return NextResponse.redirect(
       new URL(`/${userLocale}/${pathname}`, request.url)
     );
