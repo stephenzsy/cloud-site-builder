@@ -62,4 +62,9 @@ export default async function configure({ strapi }: { strapi: Strapi }) {
     "plugin-users-permissions-jwtSecret",
     "plugin.users-permissions.jwtSecret"
   );
+
+  await fetcher.fetchSecret(
+    "plugin-azure-integrations-email-service-connection-string",
+    "plugin.azure-integrations.emailServiceConnectionString"
+  );
 }

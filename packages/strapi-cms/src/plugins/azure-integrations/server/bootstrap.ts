@@ -2,6 +2,8 @@ import { DefaultAzureCredential } from "@azure/identity";
 import { ContainerClient } from "@azure/storage-blob";
 import type { Strapi } from "@strapi/strapi";
 import UploadBlobProvider from "./providers/upload-blob";
+import { EmailClient } from "@azure/communication-email";
+import AzureCommunicationEmailProvider from "./providers/communication-email";
 
 export default async ({ strapi }: { strapi: Strapi }) => {
   // bootstrap phase
@@ -20,6 +22,17 @@ export default async ({ strapi }: { strapi: Strapi }) => {
     strapi.plugin("upload").provider = new UploadBlobProvider(
       new ContainerClient(blobContainerUrl, new DefaultAzureCredential()),
       strapi.config.get("plugin.azure-integrations.blobUploadPrefix")
+    );
+  }
+
+  const emailServiceConnectionString = strapi.config.get(
+    "plugin.azure-integrations.emailServiceConnectionString"
+  );
+  if (blobContainerUrl) {
+    strapi.log.info(`Set up Azure Communication service email`);
+    strapi.plugin("email").provider = new AzureCommunicationEmailProvider(
+      new EmailClient(emailServiceConnectionString),
+      strapi.config.get("plugin.email")
     );
   }
 };

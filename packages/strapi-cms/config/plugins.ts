@@ -14,8 +14,8 @@ export default function pluginsConfig({ env }) {
       enabled: true,
       resolve: "./src/plugins/next-builder-connector",
       config: {
-        previewSiteUrl: env("PREVIEW_SITE_URL")
-      }
+        previewSiteUrl: env("PREVIEW_SITE_URL"),
+      },
     },
     graphql: {
       config: {
@@ -23,6 +23,13 @@ export default function pluginsConfig({ env }) {
           schema: true,
         },
         generateArtifacts: true,
+      },
+    },
+    email: {
+      config: {
+        settings: {
+          defaultFrom: env("AZURE_COMMUNICATION_EMAIL_DEFAULT_MAILFROM"),
+        },
       },
     },
   };

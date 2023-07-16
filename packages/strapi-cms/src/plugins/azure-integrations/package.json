@@ -8,6 +8,7 @@
     "kind": "plugin"
   },
   "dependencies": {
+    "@azure/communication-email": "^1.0.0",
     "@azure/identity": "^3.2.3",
     "@azure/keyvault-secrets": "^4.7.0",
     "@azure/storage-blob": "^12.15.0",
