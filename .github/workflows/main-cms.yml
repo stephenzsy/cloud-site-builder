@@ -34,5 +34,4 @@ jobs:
           az acr login --name ${{ secrets.ACR_NAME }}
           docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ secrets.REGISTRY_REPO_NAME }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ secrets.REGISTRY_REPO_NAME }}
-          az acr run --cmd "acr purge --filter '${{ secrets.REGISTRY_REPO_NAME }}:.*' --untagged --ago 5d" --registry ${{ secrets.ACR_NAME }} /dev/null
         working-directory: packages/strapi-cms
