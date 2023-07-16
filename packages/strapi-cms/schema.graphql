@@ -536,7 +536,6 @@ type Site {
   content(filters: ComponentSlotContentFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSlotContent]
   createdAt: DateTime
   cssVariables: JSON
-  homepage: PageEntityResponse
   locale: String
   localizations(filters: SiteFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SiteRelationResponseCollection
   name: String!
@@ -563,7 +562,6 @@ input SiteFiltersInput {
   content: ComponentSlotContentFiltersInput
   createdAt: DateTimeFilterInput
   cssVariables: JSONFilterInput
-  homepage: PageFiltersInput
   id: IDFilterInput
   locale: StringFilterInput
   localizations: SiteFiltersInput
@@ -577,7 +575,6 @@ input SiteFiltersInput {
 input SiteInput {
   content: [ComponentSlotContentInput]
   cssVariables: JSON
-  homepage: ID
   name: String
   pages: [ID]
 }
