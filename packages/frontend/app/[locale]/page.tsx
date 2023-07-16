@@ -1,10 +1,29 @@
 import { Entity } from "@/lib/models/common";
 import { ComponentSlotContent, Section } from "@/lib/models/entities";
-import React from "react"
+import React from "react";
 import type { SiteLoader } from "@/lib/site-loader";
-import { getLoaderConfig, mapSlots } from "./_utils";
+import { getLoaderConfig, mapSlots } from "../_utils";
 
 export { generateStaticParams } from "./layout";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const loaderConfig = getLoaderConfig();
+  if (!loaderConfig) return;
+  const [loader, siteId] = loaderConfig;
+  const site = await loader.getSiteAsync(siteId, params.locale);
+  const title = site?.attributes?.content
+    ?.find((x) => x.slotName === "site-title")
+    ?.textValue?.trim();
+  if (title) {
+    return {
+      title,
+    };
+  }
+}
 
 function PageSectionSlot({
   section,

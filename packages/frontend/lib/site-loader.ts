@@ -1,9 +1,14 @@
 import { GraphQLClient, gql } from "graphql-request";
 import { Entity, EntityResponse, ID } from "./models/common";
-import { LocalizedEntityAttributes, Page, Section, Site } from "./models/entities";
+import {
+  LocalizedEntityAttributes,
+  Page,
+  Section,
+  Site,
+} from "./models/entities";
 
 export interface SiteLoader {
-  getSiteAsync(id: ID, locale: string): Promise<Entity<Site> | undefined>;
+  getSiteAsync(id: ID, locale?: string): Promise<Entity<Site> | undefined>;
   getPageAsync(id: ID, locale: string): Promise<Entity<Page> | undefined>;
   getSectionAsync(id: ID, locale: string): Promise<Entity<Section> | undefined>;
   getStoredSection(id: ID, locale: string): Entity<Section> | undefined;
@@ -104,7 +109,7 @@ export class GraphqlLiveSiteLoader implements SiteLoader {
   private readonly sitesStore: Record<ID, Entity<Site>> = {};
   private readonly pagesStore: Record<ID, Entity<Page>> = {};
   private readonly sectionsStore: Record<ID, Entity<Section>> = {};
-  private readonly sectionWalkedThrough: Record<string, boolean> = {}
+  private readonly sectionWalkedThrough: Record<string, boolean> = {};
 
   private readonly defaultLocale = "en";
 
@@ -116,10 +121,14 @@ export class GraphqlLiveSiteLoader implements SiteLoader {
     });
   }
 
-  private getStoredEntity<T extends LocalizedEntityAttributes<T>>(store: Record<ID, Entity<T>>, id: ID, locale?: string): Entity<T> | undefined {
+  private getStoredEntity<T extends LocalizedEntityAttributes<T>>(
+    store: Record<ID, Entity<T>>,
+    id: ID,
+    locale?: string
+  ): Entity<T> | undefined {
     let stored = store[id];
     if (!stored) {
-      return undefined
+      return undefined;
     }
 
     if (!locale) {
@@ -160,7 +169,7 @@ export class GraphqlLiveSiteLoader implements SiteLoader {
     query: string,
     key: K,
     id: ID,
-    locale?: string,
+    locale?: string
   ): Promise<Entity<T> | undefined> {
     let stored = store[id];
     if (!stored) {
@@ -208,7 +217,7 @@ export class GraphqlLiveSiteLoader implements SiteLoader {
 
   public getSiteAsync(
     id: ID,
-    locale: string
+    locale?: string
   ): Promise<Entity<Site> | undefined> {
     return this.getEntityAsync<Site, "site">(
       this.sitesStore,
@@ -230,13 +239,15 @@ export class GraphqlLiveSiteLoader implements SiteLoader {
       id,
       locale
     );
-    const fetchLinked = page?.attributes?.content?.filter(c => !!c.section)?.map(async (s) => {
-      if (s.section?.data?.id) {
-        return this.getSectionAsync(s.section.data.id, locale);
-      }
-    });
+    const fetchLinked = page?.attributes?.content
+      ?.filter((c) => !!c.section)
+      ?.map(async (s) => {
+        if (s.section?.data?.id) {
+          return this.getSectionAsync(s.section.data.id, locale);
+        }
+      });
     if (fetchLinked) {
-      await Promise.all(fetchLinked)
+      await Promise.all(fetchLinked);
     }
     return page;
   }
@@ -252,19 +263,21 @@ export class GraphqlLiveSiteLoader implements SiteLoader {
       id,
       locale
     );
-    const walkKey = `${id}:locale`
+    const walkKey = `${id}:locale`;
     if (!this.sectionWalkedThrough[walkKey]) {
-      this.sectionWalkedThrough[walkKey] = true
-      const fetchLinked = section?.attributes?.content?.filter(c => !!c.section)?.map(async (s) => {
-        if (s.section?.data?.id) {
-          return this.getSectionAsync(s.section.data.id, locale);
-        }
-      });
+      this.sectionWalkedThrough[walkKey] = true;
+      const fetchLinked = section?.attributes?.content
+        ?.filter((c) => !!c.section)
+        ?.map(async (s) => {
+          if (s.section?.data?.id) {
+            return this.getSectionAsync(s.section.data.id, locale);
+          }
+        });
       if (fetchLinked) {
-        await Promise.all(fetchLinked)
+        await Promise.all(fetchLinked);
       }
     }
-    return section
+    return section;
   }
 
   public getStoredSection(id: ID, locale: string) {

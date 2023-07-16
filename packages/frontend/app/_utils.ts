@@ -13,15 +13,26 @@ function getLiveSiteLoader(): [SiteLoader, string] | undefined {
   }
 }
 
+let staticLoaderConfig: [SiteLoader, string] | undefined | false;
+
 function getEnvSiteLoader(): [SiteLoader, string] | undefined {
-  const token = process.env.STRAPI_TOKEN?.trim();
-  const siteId = process.env.SITE_ID?.trim();
-  if (token && siteId) {
-    return [
-      new GraphqlLiveSiteLoader(process.env.STRAPI_CMS_GRAPHQL_URL!, token),
-      siteId,
-    ];
+  if (staticLoaderConfig === false) {
+    return undefined;
   }
+  if (!staticLoaderConfig) {
+    const token = process.env.STRAPI_TOKEN?.trim();
+    const siteId = process.env.SITE_ID?.trim();
+    if (token && siteId) {
+      staticLoaderConfig = [
+        new GraphqlLiveSiteLoader(process.env.STRAPI_CMS_GRAPHQL_URL!, token),
+        siteId,
+      ];
+      return staticLoaderConfig;
+    } else {
+      staticLoaderConfig = false;
+    }
+  }
+  return undefined;
 }
 
 export const getLoaderConfig =
