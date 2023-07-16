@@ -22,11 +22,11 @@ module.exports = {
           DEFAULT: "rgb(var(--color-brand) / <alpha-value>)",
         },
         brand_analogous_ccw_1: {
-          200: "rgb(var(--color-brand-analogous-ccw-1-200) / <alpha-value>)",
+          200: "hsl(var(--color-brand-analogous-ccw-1-200-hsl) / <alpha-value>)",
         },
         brand_analogous_cw_1: {
-          100: "rgb(var(--color-brand-analogous-cw-1-100) / <alpha-value>)",
-        }
+          100: "hsl(var(--color-brand-analogous-cw-1-100-hsl) / <alpha-value>)",
+        },
       },
     },
   },

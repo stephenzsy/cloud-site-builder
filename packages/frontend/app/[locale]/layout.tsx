@@ -1,10 +1,8 @@
 import { SlotContentSvgIcon } from "@/components/slot-content/svg-icon";
-import { ComponentSlotContent } from "@/lib/models/components";
-import { GraphqlLiveSiteLoader, SiteLoader } from "@/lib/site-loader";
 import { supportedLocales } from "@/middleware";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { cookies } from "next/headers";
+import { getLoaderConfig, mapSlots } from "./_utils";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,50 +18,6 @@ export async function generateStaticParams() {
   }));
 }
 
-function mapSlots(
-  content: ComponentSlotContent[] | undefined
-): [ComponentSlotContent[], Record<string, ComponentSlotContent[]>] {
-  const namedSlots: Record<string, ComponentSlotContent[]> = {};
-  const defaultSlot: ComponentSlotContent[] = [];
-
-  if (content) {
-    for (const entry of content) {
-      if (entry.slotName) {
-        let namedSlot = namedSlots[entry.slotName];
-        if (!namedSlot) {
-          namedSlot = namedSlots[entry.slotName] = [];
-        }
-        namedSlot.push(entry);
-      } else {
-        defaultSlot.push(entry);
-      }
-    }
-  }
-  return [defaultSlot, namedSlots];
-}
-
-function getLiveSiteLoader(): [SiteLoader, string] | undefined {
-  const token = cookies().get("StrapiToken")?.value.trim();
-  const siteId = cookies().get("StrapiSiteId")?.value.trim();
-  if (token && siteId) {
-    return [
-      new GraphqlLiveSiteLoader(process.env.STRAPI_CMS_GRAPHQL_URL!, token),
-      siteId,
-    ];
-  }
-}
-
-function getEnvSiteLoader(): [SiteLoader, string] | undefined {
-  const token = process.env.STRAPI_TOKEN?.trim();
-  const siteId = process.env.SITE_ID?.trim();
-  if (token && siteId) {
-    return [
-      new GraphqlLiveSiteLoader(process.env.STRAPI_CMS_GRAPHQL_URL!, token),
-      siteId,
-    ];
-  }
-}
-
 export default async function RootLayout({
   params,
   children,
@@ -71,10 +25,7 @@ export default async function RootLayout({
   params: { locale: string };
   children: React.ReactNode;
 }) {
-  const loaderConfig =
-    process.env.CSB_FE_ROLE === "preview"
-      ? getLiveSiteLoader()
-      : getEnvSiteLoader();
+  const loaderConfig = getLoaderConfig();
   if (!loaderConfig) {
     return (
       <html lang={params.locale}>
@@ -90,10 +41,10 @@ export default async function RootLayout({
   const [defaultSlot, namedSlots] = mapSlots(content);
   return (
     <html lang={params.locale}>
-      <body className={inter.className}>
+      <body className={`${inter.className} text-neutral-950`}>
         {cssLine && <style>{cssLine}</style>}
         <header className="pt-safe pl-safe pr-safe">
-          <div className="flex flex-row p-4 items-center gap-2 mx-auto max-w-5xl">
+          <div className="flex flex-row p-6 items-center gap-2 mx-auto max-w-screen-lg">
             <span className="text-6xl text-brand">
               <SlotContentSvgIcon content={namedSlots["site-logo"]} />
             </span>

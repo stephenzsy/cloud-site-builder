@@ -1,4 +1,4 @@
-import { ComponentSlotContent } from "@/lib/models/components";
+import { ComponentSlotContent } from "@/lib/models/entities";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withArrayComponent } from "./withArrayComponent";
