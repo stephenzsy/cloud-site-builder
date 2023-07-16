@@ -32,7 +32,7 @@ export default async ({ strapi }: { strapi: Strapi }) => {
     strapi.log.info(`Set up Azure Communication service email`);
     strapi.plugin("email").provider = new AzureCommunicationEmailProvider(
       new EmailClient(emailServiceConnectionString),
-      strapi.config.get("plugin.email")
+      strapi.config.get("plugin.email.settings")
     );
   }
 };
