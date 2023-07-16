@@ -19,18 +19,19 @@ function getEnvSiteLoader(): [SiteLoader, string] | undefined {
   if (staticLoaderConfig === false) {
     return undefined;
   }
-  if (!staticLoaderConfig) {
-    const token = process.env.STRAPI_TOKEN?.trim();
-    const siteId = process.env.SITE_ID?.trim();
-    if (token && siteId) {
-      staticLoaderConfig = [
-        new GraphqlLiveSiteLoader(process.env.STRAPI_CMS_GRAPHQL_URL!, token),
-        siteId,
-      ];
-      return staticLoaderConfig;
-    } else {
-      staticLoaderConfig = false;
-    }
+  if (staticLoaderConfig) {
+    return staticLoaderConfig;
+  }
+  const token = process.env.STRAPI_TOKEN?.trim();
+  const siteId = process.env.SITE_ID?.trim();
+  if (token && siteId) {
+    staticLoaderConfig = [
+      new GraphqlLiveSiteLoader(process.env.STRAPI_CMS_GRAPHQL_URL!, token),
+      siteId,
+    ];
+    return staticLoaderConfig;
+  } else {
+    staticLoaderConfig = false;
   }
   return undefined;
 }
