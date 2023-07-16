@@ -12,7 +12,8 @@
     "schema": {
       "type": "enumeration",
       "enum": [
-        "fontawesome"
+        "fontawesome",
+        "custom"
       ],
       "default": "fontawesome",
       "required": true
@@ -20,13 +21,6 @@
     "iconData": {
       "type": "json",
       "required": true
-    },
-    "singleImage": {
-      "allowedTypes": [
-        "images"
-      ],
-      "type": "media",
-      "multiple": false
     }
   }
 }
