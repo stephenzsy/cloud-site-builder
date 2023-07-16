@@ -40,6 +40,14 @@
         }
       },
       "component": "slot.content"
+    },
+    "cssVariables": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "json"
     }
   }
 }

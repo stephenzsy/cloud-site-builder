@@ -539,6 +539,7 @@ type SectionRelationResponseCollection {
 type Site {
   content(filters: ComponentSlotContentFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSlotContent]
   createdAt: DateTime
+  cssVariables: JSON
   locale: String
   localizations(filters: SiteFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SiteRelationResponseCollection
   name: String!
@@ -564,6 +565,7 @@ input SiteFiltersInput {
   and: [SiteFiltersInput]
   content: ComponentSlotContentFiltersInput
   createdAt: DateTimeFilterInput
+  cssVariables: JSONFilterInput
   id: IDFilterInput
   locale: StringFilterInput
   localizations: SiteFiltersInput
@@ -576,6 +578,7 @@ input SiteFiltersInput {
 
 input SiteInput {
   content: [ComponentSlotContentInput]
+  cssVariables: JSON
   name: String
   pages: [ID]
 }
