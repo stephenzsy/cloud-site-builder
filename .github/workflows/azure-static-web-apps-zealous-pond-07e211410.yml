@@ -29,7 +29,8 @@ jobs:
           api_location: "" # Api source code path - optional
           output_location: "" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
-        env: 
-          SITE_SUPPORTED_LOCALES: "en,zh-Hans,zh-Hant,es"
+        env:
+          SITE_SUPPORTED_LOCALES: en,zh-Hans,zh-Hant,es
           STRAPI_CMS_GRAPHQL_URL: ${{ secrets.STRAPI_CMS_GRAPHQL_URL }}
-          CSB_FE_ROLE: preview
+          STRAPI_TOKEN: ${{ secrets.STRAPI_PREVIEW_TOKEN }}
+          SITE_ID: ${{ secrets.STRAPI_SITE_ID }}

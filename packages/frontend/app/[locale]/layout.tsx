@@ -52,6 +52,17 @@ function getLiveSiteLoader(): [SiteLoader, string] | undefined {
   }
 }
 
+function getEnvSiteLoader(): [SiteLoader, string] | undefined {
+  const token = process.env.STRAPI_TOKEN?.trim();
+  const siteId = process.env.SITE_ID?.trim();
+  if (token && siteId) {
+    return [
+      new GraphqlLiveSiteLoader(process.env.STRAPI_CMS_GRAPHQL_URL!, token),
+      siteId,
+    ];
+  }
+}
+
 export default async function RootLayout({
   params,
   children,
@@ -60,7 +71,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const loaderConfig =
-    process.env.CSB_FE_ROLE === "preview" ? getLiveSiteLoader() : undefined;
+    process.env.CSB_FE_ROLE === "preview"
+      ? getLiveSiteLoader()
+      : getEnvSiteLoader();
   if (!loaderConfig) {
     return (
       <html lang={params.locale}>
@@ -70,7 +83,6 @@ export default async function RootLayout({
   }
   const [siteLoader, siteId] = loaderConfig;
   const siteEntity = await siteLoader.getSiteAsync(siteId, params.locale);
-  const content = siteEntity?.attributes?.content;
   // map slot
   const [defaultSlot, namedSlots] = mapSlots(siteEntity?.attributes?.content);
 
