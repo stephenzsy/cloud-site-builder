@@ -21,10 +21,10 @@ module.exports = {
           900: "rgb(var(--color-brand-900) / <alpha-value>)",
           950: "rgb(var(--color-brand-950) / <alpha-value>)",
           h30: {
-            200: "rgb(var(--color-brand-h30-100) / <alpha-value>)",
+            100: "hsl(var(--color-brand-h30-100) / <alpha-value>)",
           },
           h330: {
-            200: "rgb(var(--color-brand-h330-200) / <alpha-value>)",
+            200: "hsl(var(--color-brand-h330-200) / <alpha-value>)",
           },
         },
       },
