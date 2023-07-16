@@ -53,6 +53,7 @@ type ComponentSlotContent {
   description: String
   id: ID!
   jsonValue: JSON
+  pageLink: PageEntityResponse
   section: SectionEntityResponse
   slotName: String
   svgIcon: ComponentContentSvgIcon
@@ -66,6 +67,7 @@ input ComponentSlotContentFiltersInput {
   jsonValue: JSONFilterInput
   not: ComponentSlotContentFiltersInput
   or: [ComponentSlotContentFiltersInput]
+  pageLink: PageFiltersInput
   section: SectionFiltersInput
   slotName: StringFilterInput
   svgIcon: ComponentContentSvgIconFiltersInput
@@ -77,6 +79,7 @@ input ComponentSlotContentInput {
   description: String
   id: ID
   jsonValue: JSON
+  pageLink: ID
   section: ID
   slotName: String
   svgIcon: ComponentContentSvgIconInput

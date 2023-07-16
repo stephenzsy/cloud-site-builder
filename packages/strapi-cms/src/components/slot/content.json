@@ -32,6 +32,11 @@
     },
     "jsonValue": {
       "type": "json"
+    },
+    "pageLink": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::page.page"
     }
   }
 }
