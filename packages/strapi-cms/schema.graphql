@@ -52,6 +52,7 @@ input ComponentContentSvgIconInput {
 type ComponentSlotContent {
   description: String
   id: ID!
+  jsonValue: JSON
   section: SectionEntityResponse
   slotName: String
   svgIcon: ComponentContentSvgIcon
@@ -62,6 +63,7 @@ type ComponentSlotContent {
 input ComponentSlotContentFiltersInput {
   and: [ComponentSlotContentFiltersInput]
   description: StringFilterInput
+  jsonValue: JSONFilterInput
   not: ComponentSlotContentFiltersInput
   or: [ComponentSlotContentFiltersInput]
   section: SectionFiltersInput
@@ -74,6 +76,7 @@ input ComponentSlotContentFiltersInput {
 input ComponentSlotContentInput {
   description: String
   id: ID
+  jsonValue: JSON
   section: ID
   slotName: String
   svgIcon: ComponentContentSvgIconInput

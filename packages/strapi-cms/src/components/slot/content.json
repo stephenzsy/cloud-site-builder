@@ -29,6 +29,9 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::section.section"
+    },
+    "jsonValue": {
+      "type": "json"
     }
   }
 }
