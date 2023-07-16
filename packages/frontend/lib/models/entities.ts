@@ -19,23 +19,23 @@ export interface ComponentSlotContent {
 }
 
 // entities
-export type LocalizedEntity<T> = {
+export type LocalizedEntityAttributes<T> = {
   locale: string;
   localizations: RelationResponseCollection<T>;
 };
 
-export interface Section extends LocalizedEntity<Section> {
+export interface Section extends LocalizedEntityAttributes<Section> {
   content: ComponentSlotContent[];
   templateId: string;
 }
 
-export interface Site extends LocalizedEntity<Site> {
+export interface Site extends LocalizedEntityAttributes<Site> {
   content: ComponentSlotContent[];
   cssVariables: string[];
   pages: RelationResponseCollection<Page>;
 }
 
-export interface Page extends LocalizedEntity<Page> {
+export interface Page extends LocalizedEntityAttributes<Page> {
   content: ComponentSlotContent[];
   slug: string;
 }

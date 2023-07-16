@@ -1,8 +1,10 @@
-import { ComponentSlotContent, Section } from "@/lib/models/entities";
 import { Entity } from "@/lib/models/common";
-
-import { getLoaderConfig, mapSlots } from "./_utils";
+import { ComponentSlotContent, Section } from "@/lib/models/entities";
+import React from "react"
 import type { SiteLoader } from "@/lib/site-loader";
+import { getLoaderConfig, mapSlots } from "./_utils";
+
+export { generateStaticParams } from "./layout";
 
 function PageSectionSlot({
   section,
@@ -26,7 +28,7 @@ function PageSectionSlot({
   return null;
 }
 
-async function PageSlot({
+function PageSlot({
   content,
   siteLoader,
   locale,
@@ -38,7 +40,7 @@ async function PageSlot({
   if (content.section) {
     const id = content.section.data?.id;
     if (id) {
-      const section = await siteLoader.getSectionAsync(id, locale);
+      const section = siteLoader.getStoredSection(id, locale);
       if (section) {
         return <PageSectionSlot section={section} siteLoader={siteLoader} />;
       }

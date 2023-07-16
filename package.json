@@ -20,8 +20,7 @@
   },
   "workspaces": [
     "packages/strapi-cms",
-    "packages/strapi-cms/src/plugins/*",
-    "packages/frontend"
+    "packages/strapi-cms/src/plugins/*"
   ],
   "license": "MIT"
 }
