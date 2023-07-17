@@ -76,6 +76,14 @@
         }
       },
       "component": "content.simple"
+    },
+    "slug": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "uid"
     }
   }
 }

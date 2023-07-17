@@ -11,6 +11,7 @@ type Block {
   props: JSON
   simple: ComponentContentSimple
   slots(filters: ComponentSlotBlockFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSlotBlock]
+  slug: String
   type: ENUM_BLOCK_TYPE
   updatedAt: DateTime
 }
@@ -42,6 +43,7 @@ input BlockFiltersInput {
   props: JSONFilterInput
   simple: ComponentContentSimpleFiltersInput
   slots: ComponentSlotBlockFiltersInput
+  slug: StringFilterInput
   type: StringFilterInput
   updatedAt: DateTimeFilterInput
 }
@@ -52,6 +54,7 @@ input BlockInput {
   props: JSON
   simple: ComponentContentSimpleInput
   slots: [ComponentSlotBlockInput]
+  slug: String
   type: ENUM_BLOCK_TYPE
 }
 
