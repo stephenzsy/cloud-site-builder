@@ -67,4 +67,8 @@ export default async function configure({ strapi }: { strapi: Strapi }) {
     "plugin-azure-integrations-email-service-connection-string",
     "plugin.azure-integrations.emailServiceConnectionString"
   );
+  await fetcher.fetchSecret(
+    "plugin-next-builder-connector-jwtSecret",
+    "plugin.next-builder-connector.jwtSecret"
+  );
 }
