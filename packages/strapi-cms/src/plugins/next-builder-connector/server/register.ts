@@ -2,7 +2,7 @@ import { Strapi } from "@strapi/strapi";
 import { errors as strapiErrors } from "@strapi/utils";
 const { ForbiddenError, UnauthorizedError } = strapiErrors;
 
-const actionGroups = ["section", "page", "site"];
+const actionGroups = ["section", "page", "site", "block"];
 
 const actions = actionGroups.reduce<{ action: string }[]>(
   (prev, s) => [
