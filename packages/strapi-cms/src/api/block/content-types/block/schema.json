@@ -32,12 +32,12 @@
       },
       "type": "enumeration",
       "enum": [
-        "generic",
+        "default",
         "site",
         "page"
       ],
       "required": false,
-      "default": "generic"
+      "default": "default"
     },
     "componentType": {
       "pluginOptions": {

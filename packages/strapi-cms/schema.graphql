@@ -275,7 +275,7 @@ input DateTimeFilterInput {
 }
 
 enum ENUM_BLOCK_TYPE {
-  generic
+  default
   page
   site
 }
