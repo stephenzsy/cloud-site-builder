@@ -2,7 +2,6 @@ import { Strapi } from "@strapi/strapi";
 import jwt from "jsonwebtoken";
 
 export interface IJwtService {
-  issueContentReadToken(): string;
   getToken(ctx: { request: any }): Promise<{ sub?: unknown }> | undefined;
   verify(token: string);
 }
@@ -15,14 +14,6 @@ export default function serviceFactory({
   strapi: Strapi;
 }): IJwtService {
   return {
-    issueContentReadToken() {
-      return jwt.sign(
-        { sub: jwtSubject },
-        // use the same secret for now
-        strapi.config.get("plugin.users-permissions.jwtSecret"),
-        { expiresIn: "7d" }
-      );
-    },
     getToken(ctx: { request?: any }): Promise<{ sub?: unknown }> | undefined {
       let token;
 
@@ -48,7 +39,7 @@ export default function serviceFactory({
       return new Promise((resolve, reject) => {
         jwt.verify(
           token,
-          strapi.config.get("plugin.users-permissions.jwtSecret"),
+          strapi.config.get("plugin.next-builder-connector.jwtSecret"),
           { subject: jwtSubject },
           (err, tokenPayload = {}) => {
             if (err) {
