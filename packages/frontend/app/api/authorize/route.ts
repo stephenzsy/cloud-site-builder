@@ -4,7 +4,10 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import process from "process";
 
-export function GET(request: NextRequest) {
+const prevNote: any = undefined
+
+export function POST(request: NextRequest) {
+  if(request.headers.get("Authorization") === `Bearer ${process.env.REVALIDATE_CACHE_TOKEN}`
   if (process.env.CSB_FE_ROLE === "preview") {
     const token = request.nextUrl.searchParams.get("token")?.trim();
     const siteId = request.nextUrl.searchParams.get("siteId")?.trim();
