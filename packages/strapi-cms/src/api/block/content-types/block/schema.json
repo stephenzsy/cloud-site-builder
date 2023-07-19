@@ -80,10 +80,23 @@
     "slug": {
       "pluginOptions": {
         "i18n": {
-          "localized": true
+          "localized": false
         }
       },
-      "type": "uid"
+      "type": "string",
+      "regex": "^[\\w-\\.]+$"
+    },
+    "routingParent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::block.block",
+      "inversedBy": "routingChildren"
+    },
+    "routingChildren": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::block.block",
+      "mappedBy": "routingParent"
     }
   }
 }

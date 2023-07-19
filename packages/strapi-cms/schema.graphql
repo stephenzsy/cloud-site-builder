@@ -9,6 +9,8 @@ type Block {
   locale: String
   localizations(filters: BlockFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): BlockRelationResponseCollection
   props: JSON
+  routingChildren(filters: BlockFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): BlockRelationResponseCollection
+  routingParent: BlockEntityResponse
   simple: ComponentContentSimple
   slots(filters: ComponentSlotBlockFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSlotBlock]
   slug: String
@@ -41,6 +43,8 @@ input BlockFiltersInput {
   not: BlockFiltersInput
   or: [BlockFiltersInput]
   props: JSONFilterInput
+  routingChildren: BlockFiltersInput
+  routingParent: BlockFiltersInput
   simple: ComponentContentSimpleFiltersInput
   slots: ComponentSlotBlockFiltersInput
   slug: StringFilterInput
@@ -52,6 +56,8 @@ input BlockInput {
   componentType: String
   description: String
   props: JSON
+  routingChildren: [ID]
+  routingParent: ID
   simple: ComponentContentSimpleInput
   slots: [ComponentSlotBlockInput]
   slug: String
