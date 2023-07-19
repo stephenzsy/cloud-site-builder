@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@strapi/design-system": "^1.6.3",
-    "@strapi/helper-plugin": "^4.6.0",
+    "@strapi/helper-plugin": "^4.11.7",
     "@strapi/icons": "^1.6.3",
     "jsonwebtoken": "^9.0.1",
     "prop-types": "^15.7.2",
