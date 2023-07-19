@@ -86,17 +86,17 @@
       "type": "string",
       "regex": "^[\\w-\\.]+$"
     },
-    "routingParent": {
+    "routeParent": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::block.block",
-      "inversedBy": "routingChildren"
+      "inversedBy": "routeChildren"
     },
-    "routingChildren": {
+    "routeChildren": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::block.block",
-      "mappedBy": "routingParent"
+      "mappedBy": "routeParent"
     }
   }
 }
