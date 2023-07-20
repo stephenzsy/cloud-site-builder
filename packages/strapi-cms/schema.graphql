@@ -94,6 +94,7 @@ input BooleanFilterInput {
 
 type ComponentContentSimple {
   id: ID!
+  image: UploadFileEntityResponse
   link: BlockEntityResponse
   richText: String
   text: String
@@ -110,6 +111,7 @@ input ComponentContentSimpleFiltersInput {
 
 input ComponentContentSimpleInput {
   id: ID
+  image: ID
   link: ID
   richText: String
   text: String

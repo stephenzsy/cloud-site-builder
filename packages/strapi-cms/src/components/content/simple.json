@@ -16,6 +16,14 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::block.block"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": false
     }
   }
 }
