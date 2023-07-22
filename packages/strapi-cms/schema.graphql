@@ -5,14 +5,13 @@
 type Block {
   componentType: String
   createdAt: DateTime
-  description: String
   locale: String
   localizations(filters: BlockFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): BlockRelationResponseCollection
   props: JSON
   routeChildren(filters: BlockFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): BlockRelationResponseCollection
   routeParent: BlockEntityResponse
   simple: ComponentContentSimple
-  slots(filters: ComponentSlotBlockFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSlotBlock]
+  slots: [BlockSlotsDynamicZone]
   slug: String
   type: ENUM_BLOCK_TYPE
   updatedAt: DateTime
@@ -46,7 +45,6 @@ input BlockFiltersInput {
   routeChildren: BlockFiltersInput
   routeParent: BlockFiltersInput
   simple: ComponentContentSimpleFiltersInput
-  slots: ComponentSlotBlockFiltersInput
   slug: StringFilterInput
   type: StringFilterInput
   updatedAt: DateTimeFilterInput
@@ -59,7 +57,7 @@ input BlockInput {
   routeChildren: [ID]
   routeParent: ID
   simple: ComponentContentSimpleInput
-  slots: [ComponentSlotBlockInput]
+  slots: [BlockSlotsDynamicZoneInput!]
   slug: String
   type: ENUM_BLOCK_TYPE
 }
@@ -67,6 +65,10 @@ input BlockInput {
 type BlockRelationResponseCollection {
   data: [BlockEntity!]!
 }
+
+union BlockSlotsDynamicZone = ComponentSlotBlockRef | ComponentSlotContent | Error
+
+scalar BlockSlotsDynamicZoneInput
 
 input BooleanFilterInput {
   and: [Boolean]
@@ -166,6 +168,31 @@ input ComponentSlotBlockInput {
   slotName: String
 }
 
+type ComponentSlotBlockRef {
+  block: BlockEntityResponse
+  id: ID!
+  props: JSON
+  slotName: String
+}
+
+input ComponentSlotBlockRefFiltersInput {
+  and: [ComponentSlotBlockRefFiltersInput]
+  block: BlockFiltersInput
+  description: StringFilterInput
+  not: ComponentSlotBlockRefFiltersInput
+  or: [ComponentSlotBlockRefFiltersInput]
+  props: JSONFilterInput
+  slotName: StringFilterInput
+}
+
+input ComponentSlotBlockRefInput {
+  block: ID
+  description: String
+  id: ID
+  props: JSON
+  slotName: String
+}
+
 type ComponentSlotContainer {
   description: String
   id: ID!
@@ -187,41 +214,36 @@ input ComponentSlotContainerInput {
 }
 
 type ComponentSlotContent {
-  description: String
   id: ID!
-  jsonValue: JSON
-  pageLink: PageEntityResponse
-  section: SectionEntityResponse
+  image: UploadFileEntityResponse
+  longText: String
+  props: JSON
+  richText: String
   slotName: String
-  svgIcon: ComponentContentSvgIcon
-  textValue: String
-  visible: Boolean
+  text: String
 }
 
 input ComponentSlotContentFiltersInput {
   and: [ComponentSlotContentFiltersInput]
   description: StringFilterInput
-  jsonValue: JSONFilterInput
+  longText: StringFilterInput
   not: ComponentSlotContentFiltersInput
   or: [ComponentSlotContentFiltersInput]
-  pageLink: PageFiltersInput
-  section: SectionFiltersInput
+  props: JSONFilterInput
+  richText: StringFilterInput
   slotName: StringFilterInput
-  svgIcon: ComponentContentSvgIconFiltersInput
-  textValue: StringFilterInput
-  visible: BooleanFilterInput
+  text: StringFilterInput
 }
 
 input ComponentSlotContentInput {
   description: String
   id: ID
-  jsonValue: JSON
-  pageLink: ID
-  section: ID
+  image: ID
+  longText: String
+  props: JSON
+  richText: String
   slotName: String
-  svgIcon: ComponentContentSvgIconInput
-  textValue: String
-  visible: Boolean
+  text: String
 }
 
 """
@@ -328,7 +350,7 @@ input FloatFilterInput {
   startsWith: Float
 }
 
-union GenericMorph = Block | ComponentContentSimple | ComponentContentSvgIcon | ComponentSlotBlock | ComponentSlotContainer | ComponentSlotContent | I18NLocale | Page | Section | Site | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph = Block | ComponentContentSimple | ComponentContentSvgIcon | ComponentSlotBlock | ComponentSlotBlockRef | ComponentSlotContainer | ComponentSlotContent | I18NLocale | Page | Section | Site | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
 
 type I18NLocale {
   code: String

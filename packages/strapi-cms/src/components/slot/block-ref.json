@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_slot_block_refs",
+  "info": {
+    "displayName": "Block Reference",
+    "icon": "oneWay"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "string",
+      "private": true
+    },
+    "slotName": {
+      "type": "string",
+      "regex": "[\\w-\\.]+",
+      "unique": false
+    },
+    "props": {
+      "type": "json"
+    },
+    "block": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::block.block"
+    }
+  }
+}

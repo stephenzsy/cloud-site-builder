@@ -2,41 +2,37 @@
   "collectionName": "components_slot_contents",
   "info": {
     "displayName": "Content",
-    "description": ""
+    "description": "",
+    "icon": "bulletList"
   },
   "options": {},
   "attributes": {
     "description": {
       "type": "string",
-      "description": "Not used for generating site"
-    },
-    "visible": {
-      "type": "boolean",
-      "default": true
+      "description": "Not used for generating site",
+      "private": true
     },
     "slotName": {
       "type": "string"
     },
-    "textValue": {
-      "type": "string"
-    },
-    "svgIcon": {
-      "type": "component",
-      "repeatable": false,
-      "component": "content.svg-icon"
-    },
-    "section": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::section.section"
-    },
-    "jsonValue": {
+    "props": {
       "type": "json"
     },
-    "pageLink": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::page.page"
+    "text": {
+      "type": "string"
+    },
+    "longText": {
+      "type": "text"
+    },
+    "richText": {
+      "type": "richtext"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

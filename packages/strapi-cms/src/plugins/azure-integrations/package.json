@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@azure/communication-email": "^1.0.0",
-    "@azure/identity": "^3.2.3",
+    "@azure/identity": "^3.2.4",
     "@azure/keyvault-secrets": "^4.7.0",
     "@azure/storage-blob": "^12.15.0",
     "@strapi/design-system": "^1.6.3",
@@ -24,7 +24,7 @@
     "@types/styled-components": "^5.1.26",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^6.0.4",
+    "styled-components": "^6.0.5",
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
