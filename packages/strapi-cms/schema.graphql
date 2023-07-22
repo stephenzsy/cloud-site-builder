@@ -10,7 +10,6 @@ type Block {
   props: JSON
   routeChildren(filters: BlockFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): BlockRelationResponseCollection
   routeParent: BlockEntityResponse
-  simple: ComponentContentSimple
   slots: [BlockSlotsDynamicZone]
   slug: String
   type: ENUM_BLOCK_TYPE
@@ -44,7 +43,6 @@ input BlockFiltersInput {
   props: JSONFilterInput
   routeChildren: BlockFiltersInput
   routeParent: BlockFiltersInput
-  simple: ComponentContentSimpleFiltersInput
   slug: StringFilterInput
   type: StringFilterInput
   updatedAt: DateTimeFilterInput
@@ -56,7 +54,6 @@ input BlockInput {
   props: JSON
   routeChildren: [ID]
   routeParent: ID
-  simple: ComponentContentSimpleInput
   slots: [BlockSlotsDynamicZoneInput!]
   slug: String
   type: ENUM_BLOCK_TYPE
@@ -94,80 +91,6 @@ input BooleanFilterInput {
   startsWith: Boolean
 }
 
-type ComponentContentSimple {
-  id: ID!
-  image: UploadFileEntityResponse
-  link: BlockEntityResponse
-  richText: String
-  text: String
-}
-
-input ComponentContentSimpleFiltersInput {
-  and: [ComponentContentSimpleFiltersInput]
-  link: BlockFiltersInput
-  not: ComponentContentSimpleFiltersInput
-  or: [ComponentContentSimpleFiltersInput]
-  richText: StringFilterInput
-  text: StringFilterInput
-}
-
-input ComponentContentSimpleInput {
-  id: ID
-  image: ID
-  link: ID
-  richText: String
-  text: String
-}
-
-type ComponentContentSvgIcon {
-  description: String
-  iconData: JSON!
-  id: ID!
-  schema: ENUM_COMPONENTCONTENTSVGICON_SCHEMA!
-}
-
-input ComponentContentSvgIconFiltersInput {
-  and: [ComponentContentSvgIconFiltersInput]
-  description: StringFilterInput
-  iconData: JSONFilterInput
-  not: ComponentContentSvgIconFiltersInput
-  or: [ComponentContentSvgIconFiltersInput]
-  schema: StringFilterInput
-}
-
-input ComponentContentSvgIconInput {
-  description: String
-  iconData: JSON
-  id: ID
-  schema: ENUM_COMPONENTCONTENTSVGICON_SCHEMA
-}
-
-type ComponentSlotBlock {
-  block: BlockEntityResponse
-  description: String
-  id: ID!
-  simple: ComponentContentSimple
-  slotName: String
-}
-
-input ComponentSlotBlockFiltersInput {
-  and: [ComponentSlotBlockFiltersInput]
-  block: BlockFiltersInput
-  description: StringFilterInput
-  not: ComponentSlotBlockFiltersInput
-  or: [ComponentSlotBlockFiltersInput]
-  simple: ComponentContentSimpleFiltersInput
-  slotName: StringFilterInput
-}
-
-input ComponentSlotBlockInput {
-  block: ID
-  description: String
-  id: ID
-  simple: ComponentContentSimpleInput
-  slotName: String
-}
-
 type ComponentSlotBlockRef {
   block: BlockEntityResponse
   id: ID!
@@ -190,26 +113,6 @@ input ComponentSlotBlockRefInput {
   description: String
   id: ID
   props: JSON
-  slotName: String
-}
-
-type ComponentSlotContainer {
-  description: String
-  id: ID!
-  slotName: String
-}
-
-input ComponentSlotContainerFiltersInput {
-  and: [ComponentSlotContainerFiltersInput]
-  description: StringFilterInput
-  not: ComponentSlotContainerFiltersInput
-  or: [ComponentSlotContainerFiltersInput]
-  slotName: StringFilterInput
-}
-
-input ComponentSlotContainerInput {
-  description: String
-  id: ID
   slotName: String
 }
 
@@ -310,11 +213,6 @@ enum ENUM_BLOCK_TYPE {
   site
 }
 
-enum ENUM_COMPONENTCONTENTSVGICON_SCHEMA {
-  custom
-  fontawesome
-}
-
 type Error {
   code: String!
   message: String
@@ -350,7 +248,7 @@ input FloatFilterInput {
   startsWith: Float
 }
 
-union GenericMorph = Block | ComponentContentSimple | ComponentContentSvgIcon | ComponentSlotBlock | ComponentSlotBlockRef | ComponentSlotContainer | ComponentSlotContent | I18NLocale | Page | Section | Site | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph = Block | ComponentSlotBlockRef | ComponentSlotContent | I18NLocale | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
 
 type I18NLocale {
   code: String
@@ -507,12 +405,6 @@ type Mutation {
   changePassword(currentPassword: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
   createBlock(data: BlockInput!, locale: I18NLocaleCode): BlockEntityResponse
   createBlockLocalization(data: BlockInput, id: ID, locale: I18NLocaleCode): BlockEntityResponse
-  createPage(data: PageInput!, locale: I18NLocaleCode): PageEntityResponse
-  createPageLocalization(data: PageInput, id: ID, locale: I18NLocaleCode): PageEntityResponse
-  createSection(data: SectionInput!, locale: I18NLocaleCode): SectionEntityResponse
-  createSectionLocalization(data: SectionInput, id: ID, locale: I18NLocaleCode): SectionEntityResponse
-  createSite(data: SiteInput!, locale: I18NLocaleCode): SiteEntityResponse
-  createSiteLocalization(data: SiteInput, id: ID, locale: I18NLocaleCode): SiteEntityResponse
   createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
   createUploadFolder(data: UploadFolderInput!): UploadFolderEntityResponse
 
@@ -522,9 +414,6 @@ type Mutation {
   """Create a new user"""
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
   deleteBlock(id: ID!, locale: I18NLocaleCode): BlockEntityResponse
-  deletePage(id: ID!, locale: I18NLocaleCode): PageEntityResponse
-  deleteSection(id: ID!, locale: I18NLocaleCode): SectionEntityResponse
-  deleteSite(id: ID!, locale: I18NLocaleCode): SiteEntityResponse
   deleteUploadFile(id: ID!): UploadFileEntityResponse
   deleteUploadFolder(id: ID!): UploadFolderEntityResponse
 
@@ -552,9 +441,6 @@ type Mutation {
   resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
   updateBlock(data: BlockInput!, id: ID!, locale: I18NLocaleCode): BlockEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
-  updatePage(data: PageInput!, id: ID!, locale: I18NLocaleCode): PageEntityResponse
-  updateSection(data: SectionInput!, id: ID!, locale: I18NLocaleCode): SectionEntityResponse
-  updateSite(data: SiteInput!, id: ID!, locale: I18NLocaleCode): SiteEntityResponse
   updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
   updateUploadFolder(data: UploadFolderInput!, id: ID!): UploadFolderEntityResponse
 
@@ -564,57 +450,6 @@ type Mutation {
   """Update an existing user"""
   updateUsersPermissionsUser(data: UsersPermissionsUserInput!, id: ID!): UsersPermissionsUserEntityResponse!
   upload(field: String, file: Upload!, info: FileInfoInput, ref: String, refId: ID): UploadFileEntityResponse!
-}
-
-type Page {
-  content(filters: ComponentSlotContentFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSlotContent]
-  createdAt: DateTime
-  locale: String
-  localizations(filters: PageFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): PageRelationResponseCollection
-  name: String
-  site: SiteEntityResponse
-  slug: String
-  updatedAt: DateTime
-}
-
-type PageEntity {
-  attributes: Page
-  id: ID
-}
-
-type PageEntityResponse {
-  data: PageEntity
-}
-
-type PageEntityResponseCollection {
-  data: [PageEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input PageFiltersInput {
-  and: [PageFiltersInput]
-  content: ComponentSlotContentFiltersInput
-  createdAt: DateTimeFilterInput
-  id: IDFilterInput
-  locale: StringFilterInput
-  localizations: PageFiltersInput
-  name: StringFilterInput
-  not: PageFiltersInput
-  or: [PageFiltersInput]
-  site: SiteFiltersInput
-  slug: StringFilterInput
-  updatedAt: DateTimeFilterInput
-}
-
-input PageInput {
-  content: [ComponentSlotContentInput]
-  name: String
-  site: ID
-  slug: String
-}
-
-type PageRelationResponseCollection {
-  data: [PageEntity!]!
 }
 
 type Pagination {
@@ -642,12 +477,6 @@ type Query {
   i18NLocale(id: ID): I18NLocaleEntityResponse
   i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
   me: UsersPermissionsMe
-  page(id: ID, locale: I18NLocaleCode): PageEntityResponse
-  pages(filters: PageFiltersInput, locale: I18NLocaleCode, pagination: PaginationArg = {}, sort: [String] = []): PageEntityResponseCollection
-  section(id: ID, locale: I18NLocaleCode): SectionEntityResponse
-  sections(filters: SectionFiltersInput, locale: I18NLocaleCode, pagination: PaginationArg = {}, sort: [String] = []): SectionEntityResponseCollection
-  site(id: ID, locale: I18NLocaleCode): SiteEntityResponse
-  sites(filters: SiteFiltersInput, locale: I18NLocaleCode, pagination: PaginationArg = {}, sort: [String] = []): SiteEntityResponseCollection
   uploadFile(id: ID): UploadFileEntityResponse
   uploadFiles(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileEntityResponseCollection
   uploadFolder(id: ID): UploadFolderEntityResponse
@@ -660,105 +489,6 @@ type Query {
 
 type ResponseCollectionMeta {
   pagination: Pagination!
-}
-
-type Section {
-  content(filters: ComponentSlotContentFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSlotContent]
-  createdAt: DateTime
-  description: String
-  locale: String
-  localizations(filters: SectionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SectionRelationResponseCollection
-  templateId: String!
-  updatedAt: DateTime
-}
-
-type SectionEntity {
-  attributes: Section
-  id: ID
-}
-
-type SectionEntityResponse {
-  data: SectionEntity
-}
-
-type SectionEntityResponseCollection {
-  data: [SectionEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input SectionFiltersInput {
-  and: [SectionFiltersInput]
-  content: ComponentSlotContentFiltersInput
-  createdAt: DateTimeFilterInput
-  description: StringFilterInput
-  id: IDFilterInput
-  locale: StringFilterInput
-  localizations: SectionFiltersInput
-  not: SectionFiltersInput
-  or: [SectionFiltersInput]
-  templateId: StringFilterInput
-  updatedAt: DateTimeFilterInput
-}
-
-input SectionInput {
-  content: [ComponentSlotContentInput]
-  description: String
-  templateId: String
-}
-
-type SectionRelationResponseCollection {
-  data: [SectionEntity!]!
-}
-
-type Site {
-  content(filters: ComponentSlotContentFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSlotContent]
-  createdAt: DateTime
-  cssVariables: JSON
-  locale: String
-  localizations(filters: SiteFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): SiteRelationResponseCollection
-  name: String!
-  pages(filters: PageFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): PageRelationResponseCollection
-  updatedAt: DateTime
-}
-
-type SiteEntity {
-  attributes: Site
-  id: ID
-}
-
-type SiteEntityResponse {
-  data: SiteEntity
-}
-
-type SiteEntityResponseCollection {
-  data: [SiteEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input SiteFiltersInput {
-  and: [SiteFiltersInput]
-  content: ComponentSlotContentFiltersInput
-  createdAt: DateTimeFilterInput
-  cssVariables: JSONFilterInput
-  id: IDFilterInput
-  locale: StringFilterInput
-  localizations: SiteFiltersInput
-  name: StringFilterInput
-  not: SiteFiltersInput
-  or: [SiteFiltersInput]
-  pages: PageFiltersInput
-  updatedAt: DateTimeFilterInput
-}
-
-input SiteInput {
-  content: [ComponentSlotContentInput]
-  cssVariables: JSON
-  name: String
-  pages: [ID]
-}
-
-type SiteRelationResponseCollection {
-  data: [SiteEntity!]!
 }
 
 input StringFilterInput {
