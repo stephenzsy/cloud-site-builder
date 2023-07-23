@@ -117,8 +117,10 @@ input ComponentSlotBlockRefInput {
 }
 
 type ComponentSlotContent {
+  componentType: String
   id: ID!
   image: UploadFileEntityResponse
+  link: BlockEntityResponse
   longText: String
   props: JSON
   richText: String
@@ -128,7 +130,9 @@ type ComponentSlotContent {
 
 input ComponentSlotContentFiltersInput {
   and: [ComponentSlotContentFiltersInput]
+  componentType: StringFilterInput
   description: StringFilterInput
+  link: BlockFiltersInput
   longText: StringFilterInput
   not: ComponentSlotContentFiltersInput
   or: [ComponentSlotContentFiltersInput]
@@ -139,9 +143,11 @@ input ComponentSlotContentFiltersInput {
 }
 
 input ComponentSlotContentInput {
+  componentType: String
   description: String
   id: ID
   image: ID
+  link: ID
   longText: String
   props: JSON
   richText: String

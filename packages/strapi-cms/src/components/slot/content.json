@@ -13,7 +13,8 @@
       "private": true
     },
     "slotName": {
-      "type": "string"
+      "type": "string",
+      "regex": "^[\\w-\\.]+$"
     },
     "props": {
       "type": "json"
@@ -28,11 +29,21 @@
       "type": "richtext"
     },
     "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "link": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::block.block"
+    },
+    "componentType": {
+      "type": "string",
+      "regex": "^[\\w-\\.]+$"
     }
   }
 }
