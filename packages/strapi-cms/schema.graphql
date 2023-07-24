@@ -120,6 +120,7 @@ type ComponentSlotContent {
   componentType: String
   id: ID!
   image: UploadFileEntityResponse
+  images(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection
   link: BlockEntityResponse
   longText: String
   props: JSON
@@ -147,6 +148,7 @@ input ComponentSlotContentInput {
   description: String
   id: ID
   image: ID
+  images: [ID]
   link: ID
   longText: String
   props: JSON

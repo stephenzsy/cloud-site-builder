@@ -44,6 +44,13 @@
     "componentType": {
       "type": "string",
       "regex": "^[\\w-\\.]+$"
+    },
+    "images": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }
