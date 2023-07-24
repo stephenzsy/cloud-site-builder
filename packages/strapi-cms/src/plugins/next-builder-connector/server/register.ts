@@ -4,14 +4,11 @@ const { ForbiddenError, UnauthorizedError } = strapiErrors;
 
 const actionGroups = ["block"];
 
-const actions = actionGroups.reduce<{ action: string }[]>(
-  (prev, s) => [
-    ...prev,
-    { action: `api::${s}.${s}.find` },
-    { action: `api::${s}.${s}.findOne` },
-  ],
-  []
-);
+const actions = [
+  { action: "api::block.block.find" },
+  { action: "api::block.block.fineOne" },
+  { action: "plugin::upload.content-api.findOne" },
+];
 
 export default async ({ strapi }: { strapi: Strapi }) => {
   // registeration phase
