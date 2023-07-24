@@ -2,12 +2,9 @@ import { Strapi } from "@strapi/strapi";
 import { errors as strapiErrors } from "@strapi/utils";
 const { ForbiddenError, UnauthorizedError } = strapiErrors;
 
-const actionGroups = ["block"];
-
 const actions = [
   { action: "api::block.block.find" },
-  { action: "api::block.block.fineOne" },
-  { action: "plugin::upload.content-api.findOne" },
+  { action: "api::block.block.findOne" },
 ];
 
 export default async ({ strapi }: { strapi: Strapi }) => {
