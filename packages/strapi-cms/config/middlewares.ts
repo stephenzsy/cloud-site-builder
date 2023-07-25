@@ -4,6 +4,8 @@ export default function ({ env }) {
   if (envAzureBlob) {
     const url = new URL(envAzureBlob);
     cspDirective = `${url.protocol}//${url.host}`;
+  } else if (env("CLOUDINARY_NAME")) {
+    cspDirective = `https://res.cloudinary.com`;
   }
   return [
     "strapi::errors",
@@ -12,6 +14,7 @@ export default function ({ env }) {
       config: cspDirective
         ? {
             contentSecurityPolicy: {
+              useDefaults: true,
               directives: {
                 "img-src": [
                   "'self'",
