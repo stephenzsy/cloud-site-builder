@@ -28,7 +28,7 @@ export default async ({ strapi }: { strapi: Strapi }) => {
   const emailServiceConnectionString = strapi.config.get(
     "plugin.azure-integrations.emailServiceConnectionString"
   );
-  if (blobContainerUrl) {
+  if (emailServiceConnectionString) {
     strapi.log.info(`Set up Azure Communication service email`);
     strapi.plugin("email").provider = new AzureCommunicationEmailProvider(
       new EmailClient(emailServiceConnectionString),
