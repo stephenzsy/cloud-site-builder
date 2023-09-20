@@ -1,3 +1,5 @@
+#Requires -Version 7.3
+
 param(
     [Parameter(Mandatory)]
     [ValidateSet("full", "incremental")]
@@ -9,18 +11,13 @@ $isInc = $BackupType -eq "incremental"
 # load config
 . .\config.ps1
 
-$backupBasePath = $FullBackupPath
-if ($isInc) {
-    $backupBasePath = $IncrementalBackupPath
-}
-
-
 if (-not (Test-Path ${WorkDir} -PathType Container) ) {
     throw "Backup work path does not exist or is not a container: $WorkDir"
 }
 
-if (-not (Test-Path "$WorkDir\state" -PathType Container) ) {
-    New-Item -Path "$WorkDir\state" -ItemType Directory | Out-Null
+$stateDir = "$WorkDir\state"
+if (-not (Test-Path $stateDir -PathType Container) ) {
+    New-Item -Path $stateDir -ItemType Directory | Out-Null
 }
 $dataDir = "$WorkDir\data"
 if (-not (Test-Path $dataDir -PathType Container) ) {
@@ -43,18 +40,19 @@ $startTsString = $startTs.ToString("yyyyMMdd-HHmmss")
 
 if ($isInc) {
     # load last full backup
-    $lastFullBackupInfo = loadLastBackupInfo $FullBackupPath
-    if ($null -eq $lastFullBackupInfo) {
-        throw "No full backup found. Please run a full backup first."
-    }
-    [datetime]::ParseExact("20181010134412", 'yyyyMMddHHmmss', $null)
-    
+    # do nothing
 }
 else {
     # create full backup at data
     $fullBackupDir = "$dataDir/${startTsString}/full"
     New-Item -Path $fullBackupDir -ItemType Directory | Out-Null
-    CreateFullBackup $fullBackupDir
+    $status = CreateFullBackup $fullBackupDir $startTsString
+    if ($status) {
+        throw "Failed to create full backup ${status}" 
+    }
+    # write state file
+    $startTsString | Out-File -FilePath ${stateDir}/last-full-backup-ts.txt
+    Write-Host "Created full backup at $startTsString"
 }
 
 
