@@ -1,4 +1,5 @@
 #Requires -Version 7.3
+$ErrorActionPreference = "Stop"
 
 param(
     [Parameter(Mandatory)]
