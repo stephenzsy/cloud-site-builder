@@ -1,11 +1,12 @@
 #Requires -Version 7.3
-$ErrorActionPreference = "Stop"
 
 param(
     [Parameter(Mandatory)]
     [ValidateSet("full", "incremental")]
     [string]$BackupType
 )
+
+$ErrorActionPreference = "Stop"
 
 $isInc = $BackupType -eq "incremental"
 
