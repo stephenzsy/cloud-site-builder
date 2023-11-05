@@ -2654,7 +2654,7 @@
     semver "7.5.4"
     umzug "3.2.1"
 
-"@strapi/design-system@1.8.2", "@strapi/design-system@^1.6.3":
+"@strapi/design-system@1.8.2":
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/@strapi/design-system/-/design-system-1.8.2.tgz#8f70d7231f5a3bf43ac9e36bf903fc13f06ae746"
   integrity sha512-PBS/F9bCiNbM4hr6AY4QOR+QhxajLvtoJKLIhPfmmPCkPorT46DzvggTveJku/1bWiJmkVHhqytsKEhrvMsjHQ==
@@ -2673,7 +2673,7 @@
     prop-types "^15.8.1"
     react-remove-scroll "^2.5.6"
 
-"@strapi/design-system@1.9.0":
+"@strapi/design-system@1.9.0", "@strapi/design-system@^1.6.3":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@strapi/design-system/-/design-system-1.9.0.tgz#fbccd17f74cba0262c4aabbfdd8d1e8325f64e79"
   integrity sha512-JDeoJigur0lNJFkQN9XuM9BuGXHa+LIqSqT6cefH1a6x4zMxW2LGSsM7sewZfaAolKmwVgHWBI3ON9ViOLcT6Q==
@@ -2724,7 +2724,7 @@
     plop "2.7.6"
     pluralize "8.0.0"
 
-"@strapi/helper-plugin@4.12.0", "@strapi/helper-plugin@^4.12.0":
+"@strapi/helper-plugin@4.12.0":
   version "4.12.0"
   resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.12.0.tgz#3433afd0f81c131a55c219be05386d7595ccbffd"
   integrity sha512-cBT9BtYGOOt6rB0SwGWjeOdY2mSd68bcvS3ZeU06fg9QcGyJgK98eqzN+PxSiuneAJvZk4wIEsMD7Bdv3G1s0A==
@@ -2741,7 +2741,7 @@
     react-query "3.39.3"
     react-select "5.7.0"
 
-"@strapi/helper-plugin@4.13.1":
+"@strapi/helper-plugin@4.13.1", "@strapi/helper-plugin@^4.12.0":
   version "4.13.1"
   resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.13.1.tgz#1cf16db74f70f802a1a5f3c58301b92b066fb13d"
   integrity sha512-qUxUuVfeeXSmTEKykqEq36Y56iwg0WfZRK1xREuiLiLWguah7LpN1WEieZbItsMK8C/S6g4QNn9j78bx5vOvrg==
@@ -2758,12 +2758,12 @@
     react-query "3.39.3"
     react-select "5.7.0"
 
-"@strapi/icons@1.8.2", "@strapi/icons@^1.6.3":
+"@strapi/icons@1.8.2":
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/@strapi/icons/-/icons-1.8.2.tgz#d838e6566ba67ecb9adc0fce773cf54e93a13d59"
   integrity sha512-FiSYN7bDk7B8nieXLddyRgU3xMWjOcRSL2Q7b8A+pedIDLiIpfrDnsSlzmpVpU7LtQSnkOcDlFHqEXEm7zwIvg==
 
-"@strapi/icons@1.9.0":
+"@strapi/icons@1.9.0", "@strapi/icons@^1.6.3":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@strapi/icons/-/icons-1.9.0.tgz#a3d12f965e8a42082cc83149af8fb0a5e610dfe8"
   integrity sha512-w+4PGz/8mdzW+kDS8vJX/5fAZ7NBaWPDdhuLE4rqWQZuUDSsetVjgX5RQlulw/f3R52JKJmp5+p2shT84kyMbw==
@@ -2911,22 +2911,22 @@
     sharp "0.32.0"
     yup "0.32.9"
 
-"@strapi/plugin-users-permissions@^4.12.0":
-  version "4.12.0"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-users-permissions/-/plugin-users-permissions-4.12.0.tgz#23539da13d4ac7307d03c28b1c2de302163f3a40"
-  integrity sha512-h7+w+k8cdD7en8N+WPTxtc+zO9FQWTlc11FfUHp/3/a8Bp/40oZIdZiMF4R7gWnVonjJeudKdjodhhIKccqgrQ==
+"@strapi/plugin-users-permissions@^4.13.1":
+  version "4.13.1"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-users-permissions/-/plugin-users-permissions-4.13.1.tgz#524adcc3e0970aa8a47776613444e89d808541bb"
+  integrity sha512-RDk3HN1Nv/mxAi45kU8HFDJFlIg+GjvLh0MYr0DXV7xdKtK4q/C1IZs4NNYs+javIhA4kiozEFiTiNRoHfxmKg==
   dependencies:
-    "@strapi/design-system" "1.8.2"
-    "@strapi/helper-plugin" "4.12.0"
-    "@strapi/icons" "1.8.2"
-    "@strapi/utils" "4.12.0"
+    "@strapi/design-system" "1.9.0"
+    "@strapi/helper-plugin" "4.13.1"
+    "@strapi/icons" "1.9.0"
+    "@strapi/utils" "4.13.1"
     bcryptjs "2.4.3"
     formik "2.4.0"
     grant-koa "5.4.8"
     immer "9.0.19"
     jsonwebtoken "9.0.0"
     jwk-to-pem "2.0.5"
-    koa "^2.13.4"
+    koa "2.13.4"
     koa2-ratelimit "^1.1.2"
     lodash "4.17.21"
     prop-types "^15.8.1"
@@ -2935,7 +2935,7 @@
     react-query "3.39.3"
     react-redux "8.1.1"
     url-join "4.0.1"
-    yup "^0.32.9"
+    yup "0.32.9"
 
 "@strapi/provider-audit-logs-local@4.13.1":
   version "4.13.1"
@@ -7490,35 +7490,6 @@ koa@2.13.4:
   version "2.13.4"
   resolved "https://registry.yarnpkg.com/koa/-/koa-2.13.4.tgz#ee5b0cb39e0b8069c38d115139c774833d32462e"
   integrity sha512-43zkIKubNbnrULWlHdN5h1g3SEKXOEzoAlRsHOTFpnlDu8JlAOZSMJBLULusuXRequboiwJcj5vtYXKB3k7+2g==
-  dependencies:
-    accepts "^1.3.5"
-    cache-content-type "^1.0.0"
-    content-disposition "~0.5.2"
-    content-type "^1.0.4"
-    cookies "~0.8.0"
-    debug "^4.3.2"
-    delegates "^1.0.0"
-    depd "^2.0.0"
-    destroy "^1.0.4"
-    encodeurl "^1.0.2"
-    escape-html "^1.0.3"
-    fresh "~0.5.2"
-    http-assert "^1.3.0"
-    http-errors "^1.6.3"
-    is-generator-function "^1.0.7"
-    koa-compose "^4.1.0"
-    koa-convert "^2.0.0"
-    on-finished "^2.3.0"
-    only "~0.0.2"
-    parseurl "^1.3.2"
-    statuses "^1.5.0"
-    type-is "^1.6.16"
-    vary "^1.1.2"
-
-koa@^2.13.4:
-  version "2.14.2"
-  resolved "https://registry.yarnpkg.com/koa/-/koa-2.14.2.tgz#a57f925c03931c2b4d94b19d2ebf76d3244863fc"
-  integrity sha512-VFI2bpJaodz6P7x2uyLiX6RLYpZmOJqNmoCst/Yyd7hQlszyPwG/I9CQJ63nOtKSxpt5M7NH67V6nJL2BwCl7g==
   dependencies:
     accepts "^1.3.5"
     cache-content-type "^1.0.0"
